@@ -1,0 +1,21 @@
+{
+  "reviewDate": "2026-10-28",
+  "scope": "document-based framework; no new performance tests",
+  "sources": [
+    {
+      "source": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/docs/Shader特效系统项目介绍-STAR.md",
+      "sha256": "51cb198c53ffffb09ae44b695e80b5445db43d12133f0ba2fbfc932dc4c63fb9",
+      "lines": 471
+    },
+    {
+      "source": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/docs/重光照系统项目介绍-STAR.md",
+      "sha256": "be12ce91bdf3ae59eaa8343dbd2daee7bc8641158501e0e1457056d68b46e6a9",
+      "lines": 440
+    },
+    {
+      "source": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/docs/大场景LOD优化项目介绍-STAR.md",
+      "sha256": "7c13ef7b828ac117f36056a5b95d3a62c697a4c283b76fb365e4f4c197ecee75",
+      "lines": 830
+    }
+  ]
+}

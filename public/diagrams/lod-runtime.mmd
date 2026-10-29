@@ -1,0 +1,13 @@
+%% 来源：LOD STAR §3.2①④、§3.4。机制示意，不是实测时序。
+flowchart TB
+  subgraph OLD[历史故障关系]
+    direction LR
+    A[引擎目标档] -. 目标不一致 .-> B[独立距离选档]
+    B --> C[资源到达后未切档]
+  end
+  subgraph NEW[修复后的职责链路]
+    direction LR
+    D[引擎统一选档] --> E[跟踪前景下载]
+    E --> F[资源到达后同步显示]
+  end
+  OLD ~~~ NEW

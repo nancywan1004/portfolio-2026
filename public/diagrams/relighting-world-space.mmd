@@ -1,0 +1,10 @@
+%% 已提交区域的数据职责；依据 bloom.ts / committed-brightness-volume.ts，非性能实测。
+flowchart TB
+  A[屏幕笔刷拾取] --> B[世界坐标点集与影响半径]
+  B --> C[内容变化后烘焙 64³ 亮度场]
+  C --> D[splat 按世界坐标采样并调亮]
+  C --> E[按当前相机重投影屏幕掩码]
+  H[相机更新完成 framerender] --> E
+  D --> F[CameraFrame 亮部提取与模糊]
+  F --> G[compose 使用掩码约束辉光合成]
+  E --> G

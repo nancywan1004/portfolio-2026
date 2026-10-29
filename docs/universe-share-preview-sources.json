@@ -1,0 +1,62 @@
+[
+  {
+    "id": "02",
+    "url": "https://www.xiaohongshu.com/discovery/item/6a4cc945000000001c027a21?source=webshare&xhsshare=pc_web&xsec_token=ABm2xeTCWD8tFWd9IQrEYs1ZBDGZ17_4FTToSv6KyAB4I=&xsec_source=pc_share",
+    "images": [
+      "//picasso-static.xiaohongshu.com/fe-platform/e6214e4fbfae2cf14d634d4296916e8a5eaefdf4.png",
+      "http://sns-webpic-qc.xhscdn.com/202610281157/dfeaf34e8c235d2e28891b18320a67cf/spectrum/1040g0k0322ale3mv6s005qch4lb7b0tvtvoq6d0!nd_dft_wgth_webp_3"
+    ],
+    "collectedDate": "2026-10-28",
+    "localCover": "public/media/universe/demo-02.webp",
+    "sha256": "117971af49938b8f9000292e8aed1ae87f9594ff15c318745420d334d0cca283",
+    "scope": "Original share-page og:image cover only. No video downloaded or played."
+  },
+  {
+    "id": "03",
+    "url": "https://www.xiaohongshu.com/discovery/item/6a4b76060000000011006727?source=webshare&xhsshare=pc_web&xsec_token=ABA_ezy8Rldt6LG73YgDI5bYNptGJ0px4N0L82TfSgAhw=&xsec_source=pc_share",
+    "images": [
+      "//picasso-static.xiaohongshu.com/fe-platform/e6214e4fbfae2cf14d634d4296916e8a5eaefdf4.png",
+      "http://sns-webpic-qc.xhscdn.com/202610281157/64dfca4db2cced43feac0ccb4373a8d9/spectrum/1040g34o3229bq4o3n0005qch4lb7b0tvt1ucqco!nd_dft_wgth_webp_3"
+    ],
+    "collectedDate": "2026-10-28",
+    "localCover": "public/media/universe/demo-03.webp",
+    "sha256": "69d624c051399618f2ca9eeee1682e785fc04e0c2d9db84908287774f2e4db87",
+    "scope": "Original share-page og:image cover only. No video downloaded or played."
+  },
+  {
+    "id": "04",
+    "url": "https://www.xiaohongshu.com/discovery/item/6a4f7ae100000000160272f7?source=webshare&xhsshare=pc_web&xsec_token=ABIYy1-bwF4sMiTkAP4sXW6O5wiXKXh9QGNUh-xjDl-F8=&xsec_source=pc_share",
+    "images": [
+      "//picasso-static.xiaohongshu.com/fe-platform/e6214e4fbfae2cf14d634d4296916e8a5eaefdf4.png",
+      "http://sns-webpic-qc.xhscdn.com/202610281158/92e9313eaa7f88930683051aa3c59c7e/spectrum/1040g0k0322d9a3l972005qch4lb7b0tvd3h6j2g!nd_dft_wgth_webp_3"
+    ],
+    "collectedDate": "2026-10-28",
+    "localCover": "public/media/universe/demo-04.webp",
+    "sha256": "2ad04b0cb824f9a70436ae86a38e72f74936e15a7a3efd38ae2e2fd2706dfb43",
+    "scope": "Original share-page og:image cover only. No video downloaded or played."
+  },
+  {
+    "id": "05",
+    "url": "https://www.xiaohongshu.com/discovery/item/6a59fd3f000000000100d0ac?source=webshare&xhsshare=pc_web&xsec_token=ABmxYAKfEVbP8joL076aDzFmizkMhk3YY7E4qI1LdynYk=&xsec_source=pc_share",
+    "images": [
+      "//picasso-static.xiaohongshu.com/fe-platform/e6214e4fbfae2cf14d634d4296916e8a5eaefdf4.png",
+      "http://sns-webpic-qc.xhscdn.com/202610281158/ece70ac1b9628f60ff3b051c0dc8d029/spectrum/1040g0k0322niaj2mn0005qch4lb7b0tvvp0ln98!nd_dft_wgth_webp_3"
+    ],
+    "collectedDate": "2026-10-28",
+    "localCover": "public/media/universe/demo-05.webp",
+    "sha256": "255b83081eca6e087f37888f26649dd45736c2ee0d2d5443e3332a68f6a894e4",
+    "scope": "Original share-page og:image cover only. No video downloaded or played."
+  },
+  {
+    "id": "06",
+    "url": "https://www.xiaohongshu.com/discovery/item/6a5f4954000000000301d9e1?source=webshare&xhsshare=pc_web&xsec_token=ABe9tX8SCxSG6KMiMdRf50EVDcaWl1KBgZrtNycgnG0iA=&xsec_source=pc_share",
+    "images": [
+      "//picasso-static.xiaohongshu.com/fe-platform/e6214e4fbfae2cf14d634d4296916e8a5eaefdf4.png",
+      "http://sns-webpic-qc.xhscdn.com/202610281158/4baa1d9f7e5c02b9fc9cc00dd6aa516c/spectrum/1040g34o322snk0sun0105qch4lb7b0tvuomukr0!nd_dft_wgth_webp_3"
+    ],
+    "collectedDate": "2026-10-28",
+    "localCover": "public/media/universe/demo-06.webp",
+    "sha256": "c2c21b44e1d814f33ed0a38e23a1a03e920172d1036bb42988df4c65e75626ea",
+    "scope": "Original share-page og:image cover only. No video downloaded or played."
+  }
+]

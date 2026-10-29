@@ -1,0 +1,68 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LOD Mermaid render</title></head><body>
+<section><h2>lod-runtime</h2><pre class="mermaid" data-diagram="lod-runtime">%% 来源：LOD STAR §3.2①④、§3.4。机制示意，不是实测时序。
+flowchart TB
+  subgraph OLD[历史故障关系]
+    direction LR
+    A[引擎目标档] -. 目标不一致 .-&gt; B[独立距离选档]
+    B --&gt; C[资源到达后未切档]
+  end
+  subgraph NEW[修复后的职责链路]
+    direction LR
+    D[引擎统一选档] --&gt; E[跟踪前景下载]
+    E --&gt; F[资源到达后同步显示]
+  end
+  OLD ~~~ NEW
+</pre></section>
+<section><h2>lod-granularity</h2><pre class="mermaid" data-diagram="lod-granularity">%% 来源：LOD STAR §3.3。成本关系示意，不表示实测数量或必然性能结果。
+flowchart TB
+  A[调整叶块粒度] --&gt; B[更细的叶块]
+  A --&gt; C[更粗的叶块]
+  B --&gt; D[更多区间与内存块]
+  D --&gt; E[管理与更新成本增加]
+  C --&gt; F[单次换档可能引入更多数据]
+  F --&gt; G[上传尖峰风险增加]
+  E --&gt; H[结合画质和测试结果按场景标定]
+  G --&gt; H
+</pre></section>
+<section><h2>lod-oof</h2><pre class="mermaid" data-diagram="lod-oof">%% 来源：LOD STAR §3.5；当前 OOF 实现。精简的显示侧降档流程。
+flowchart TD
+  A[视锥外节点仍显示细档] --&gt; B[将目标档钳至 bootstrap]
+  B --&gt; C{粗档资源已就绪？}
+  C -- 否 --&gt; D[请求粗档资源并保留旧显示]
+  D --&gt; C
+  C -- 是 --&gt; E[引擎切换当前档并减少旧引用]
+  E --&gt; F[世界状态更新并回收旧分配区间]
+  F --&gt; G[活动占用可下降]
+  G --&gt; H[分配容量与纹理显存不保证下降]
+</pre></section>
+<section><h2>lod-runtime-mobile</h2><pre class="mermaid" data-diagram="lod-runtime-mobile">%% 移动端精简图：仅展示修复后的职责链路，来源 LOD STAR §3.2①④。
+flowchart TD
+  A[引擎统一计算目标档位] --&gt; B[Viewer 跟踪前景下载]
+  B --&gt; C[资源到达后同步显示]
+</pre></section>
+<section><h2>relighting-world-space</h2><pre class="mermaid" data-diagram="relighting-world-space">%% 已提交区域的数据职责；依据 bloom.ts / committed-brightness-volume.ts，非性能实测。
+flowchart TB
+  A[屏幕笔刷拾取] --&gt; B[世界坐标点集与影响半径]
+  B --&gt; C[内容变化后烘焙 64³ 亮度场]
+  C --&gt; D[splat 按世界坐标采样并调亮]
+  C --&gt; E[按当前相机重投影屏幕掩码]
+  H[相机更新完成 framerender] --&gt; E
+  D --&gt; F[CameraFrame 亮部提取与模糊]
+  F --&gt; G[compose 使用掩码约束辉光合成]
+  E --&gt; G
+</pre></section>
+<section><h2>relighting-world-space-mobile</h2><pre class="mermaid" data-diagram="relighting-world-space-mobile">%% 同一已提交区域链路的窄屏简图；不表示屏幕 Bloom 被烘焙为世界光照。
+flowchart TB
+  A[世界位置与半径] --&gt; B[亮度场烘焙]
+  B --&gt; C[splat 采样调亮]
+  B --&gt; D[相机更新后投影 mask]
+  C --&gt; E[亮部提取与模糊]
+  E --&gt; F[屏幕辉光合成]
+  D --&gt; F
+</pre></section>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'base',fontFamily:'PingFang SC, Microsoft YaHei, sans-serif',themeVariables:{fontSize:'14px',primaryColor:'#eeefe7',primaryTextColor:'#33392e',primaryBorderColor:'#a7af9b',lineColor:'#7d876e',secondaryColor:'#f4f4ee',tertiaryColor:'#f4f4ee',clusterBkg:'#f4f4ee',clusterBorder:'#cbd0c2',edgeLabelBackground:'#f9f8f6'},flowchart:{htmlLabels:false,useMaxWidth:true,nodeSpacing:22,rankSpacing:35}});
+try { await mermaid.run({querySelector:'.mermaid'}); document.body.dataset.renderStatus='complete'; }
+catch(error) {document.body.dataset.renderStatus='error';document.body.dataset.renderError=String(error);}
+</script></body></html>

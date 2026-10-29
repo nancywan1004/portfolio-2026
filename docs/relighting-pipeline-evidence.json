@@ -1,0 +1,56 @@
+{
+  "head": "2aeb02aad8496fc3c73d08a63676f024760a30e3",
+  "verification": "read-only source and historical diffs; no new runtime/performance tests",
+  "commits": [
+    {
+      "commit": "e6083197c0c5fdecf4b6a558298ec231c5f4b702",
+      "subject": "refactor: 修复bloom mask半径 修改： 把单圆半径从 2.5 提到 12，让相邻体素的圆明显重叠，连成一片。 每个圆改成径向渐变：中心到约 40% 半径用体素亮度，再向外渐变到黑色，重叠处会平滑过渡，不会出现硬边或明显圆点。 这样 mask 仍然是同一套 3D Volume 的投影，但 Bloom 会变成连续光晕而不是小圆点。若仍觉得有点“颗粒感”，可以把 maskRadius 再调大一点（例如 14～16）。"
+    },
+    {
+      "commit": "477ebe356677c8835d198e98d4406ea25cfd3a76",
+      "subject": "fix: 优化bloom 3D mask的voxel采样，减少亮斑感"
+    },
+    {
+      "commit": "3beae67c6eb737b60a2d7c8936a6af17b332de75",
+      "subject": "fix: 修复辉光起步值硬边界"
+    },
+    {
+      "commit": "60d37a9684d76991a3bcbf5f5a3788f2d33e7b8c",
+      "subject": "fix: 修复reveal特效播放与bloom和首帧初始化顺序导致的跳闪"
+    },
+    {
+      "commit": "0959a9a45a50da47e8029363edc69c1ea19a44db",
+      "subject": "feat: 修复bloom管线默认启用导致后处理效果不正确的问题"
+    },
+    {
+      "commit": "1ec972116fc3970f971dfa5bd367993384d4898a",
+      "subject": "feat: 关于bloom管线默认关闭+gamma运算空间修复"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/vfx/bloom/bloom.ts",
+      "sha256": "a145a65cc414c1d11825572e1935336855c6d87e2c8a3a72249da8a010ae40be"
+    },
+    {
+      "path": "src/vfx/bloom/committed-brightness-volume.ts",
+      "sha256": "893903070e6a6ed61ddbff99f41de2beb932bde84bc740cd748977904f5abcd2"
+    },
+    {
+      "path": "src/vfx/bloom/bloom-brush-flow.ts",
+      "sha256": "07c54a4ca1f23a4c491cade2420531e148856022853eee8128e8539990ed8529"
+    },
+    {
+      "path": "src/vfx/lighting/night-mode.ts",
+      "sha256": "eab395a63e521372368ddcbd72322136f9d6c0a25f0920d831b43c281e12d355"
+    },
+    {
+      "path": "src/viewer.ts",
+      "sha256": "57e16d30f2b57fe01c415ec126fe2511c56c2b547472bee7565135696bbf257a"
+    },
+    {
+      "path": "src/render/camera-frame-tone-patch.ts",
+      "sha256": "09054e477983b84c86551b79d5c7db939b965ce97cd093a1e629f64c492caf02"
+    }
+  ]
+}

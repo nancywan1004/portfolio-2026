@@ -1,0 +1,228 @@
+{
+  "auditedDate": "2026-10-28",
+  "head": "2aeb02aad8496fc3c73d08a63676f024760a30e3",
+  "scope": "Local Git, reflog, code and historical documents; no new performance tests.",
+  "commits": [
+    {
+      "sha": "c8841f9d1e9c2ed6d1a20e2bdcf3b8fc0394e585",
+      "parents": "ed9ad5d04f8848412606982e9272d319b040820e",
+      "authorDate": "2026-06-05T18:27:00+08:00",
+      "committerDate": "2026-06-05T18:27:18+08:00",
+      "subject": "feat: 新增限流foreground内chunk优先加载机制"
+    },
+    {
+      "sha": "29a3837e5cee2c9c580493f912fcbd3e99c0553c",
+      "parents": "1d52976b84527f95a5a729d29fd00e9f34bf1dee",
+      "authorDate": "2026-06-09T10:43:45+08:00",
+      "committerDate": "2026-06-09T10:43:45+08:00",
+      "subject": "feat: LOD加载优化、中间档渐进式拉取"
+    },
+    {
+      "sha": "b85c6637fa7e6fba49ab7129d7606962d2c73af9",
+      "parents": "f1a06f0a33f218a7899132b2210ef9d20fea6b47",
+      "authorDate": "2026-06-09T16:25:35+08:00",
+      "committerDate": "2026-06-09T16:25:35+08:00",
+      "subject": "feat: LOD初始加载进度条优化"
+    },
+    {
+      "sha": "64516f18c3163ac326652b6e48159110635ebd57",
+      "parents": "6c18dceb9a27a9283aa5f8878de5bc2553ec0cf8",
+      "authorDate": "2026-06-10T11:27:12+08:00",
+      "committerDate": "2026-06-10T11:27:12+08:00",
+      "subject": "feat: 进一步引入octree refinement activity，处理包括相机瞬移内的多种refinement情况"
+    },
+    {
+      "sha": "2ae761f39cdcbdcd973c2c63f32cc32f314cadf1",
+      "parents": "98a417e05597ce8f78c8c1a35e38a44b9392ffff",
+      "authorDate": "2026-06-10T17:51:33+08:00",
+      "committerDate": "2026-06-10T17:51:33+08:00",
+      "subject": "fix: 视野中心优先refinement"
+    },
+    {
+      "sha": "63ce4e3e097ec545e4b3f1bdf1ad2a278d80510e",
+      "parents": "b3f4431a628dd25aaeb7aa4cacaa5149f454cad8",
+      "authorDate": "2026-06-11T10:58:00+08:00",
+      "committerDate": "2026-06-11T10:58:00+08:00",
+      "subject": "fix: 修复长时间播放动画/未交互导致的旧文件占满并发槽、LOD未上屏的问题"
+    },
+    {
+      "sha": "2a09cf62683ee29464423c0186862d669b27ace5",
+      "parents": "2741e64087babc01092d93e2eed90f0800fc7b1b",
+      "authorDate": "2026-06-12T09:48:48+08:00",
+      "committerDate": "2026-06-12T09:48:48+08:00",
+      "subject": "feat: priorityQueue和并发槽同步"
+    },
+    {
+      "sha": "e6f4f31b7130967df62dd530eb1858e74716e08a",
+      "parents": "bbe51d6d0ef4450524680de773046e171a71891f",
+      "authorDate": "2026-06-18T10:44:32+08:00",
+      "committerDate": "2026-06-18T10:44:32+08:00",
+      "subject": "feat: 初步接入LOD benchmark和多piece接入亿级点"
+    },
+    {
+      "sha": "1b5e93762f23ef80ecbae715a131ffc4b9a2b841",
+      "parents": "e1d117dd0abb78fd9829e4f2fe85bb9cbfeebd99",
+      "authorDate": "2026-06-27T14:22:31+08:00",
+      "committerDate": "2026-06-27T14:22:31+08:00",
+      "subject": "feat: 引入benchmark"
+    },
+    {
+      "sha": "23cedcb60ae7371b2e99b24f3369c20cdfaf57bf",
+      "parents": "0c715058dbe616a7a668ee57d1db6d4292256d81",
+      "authorDate": "2026-07-15T14:12:52+08:00",
+      "committerDate": "2026-07-15T14:12:52+08:00",
+      "subject": "fix: 强制work buffer rebuild bug问题修复、octree sync去重"
+    },
+    {
+      "sha": "1e0bc0e92837bc70f07c468475798a913336be1a",
+      "parents": "23cedcb60ae7371b2e99b24f3369c20cdfaf57bf",
+      "authorDate": "2026-07-15T16:04:34+08:00",
+      "committerDate": "2026-07-15T16:04:34+08:00",
+      "subject": "fix: 排查定位bootstrap中依旧每帧执行pollStreamingBootstrapComplete的问题、帧率提升40%"
+    },
+    {
+      "sha": "7cd481cafa03536ad1e1f48f8d97c3740e5e242b",
+      "parents": "588ffc6acf3f46426dfacd245e31e84bb619ea7e",
+      "authorDate": "2026-07-23T16:40:53+08:00",
+      "committerDate": "2026-07-23T16:40:53+08:00",
+      "subject": "feat: LOD大场景优化（pollOctreeStreaming/防rebuild buffer/自适应移动阈值）"
+    },
+    {
+      "sha": "dc7cf3a04b74843772b40b3c3fcb286f3656e3f8",
+      "parents": "7cd481cafa03536ad1e1f48f8d97c3740e5e242b",
+      "authorDate": "2026-07-23T17:54:54+08:00",
+      "committerDate": "2026-07-23T17:54:54+08:00",
+      "subject": "feat：benchmark模块minimal迁移"
+    },
+    {
+      "sha": "c9fb62d4787c979d36ef283963817338c46208bf",
+      "parents": "dc7cf3a04b74843772b40b3c3fcb286f3656e3f8",
+      "authorDate": "2026-07-27T09:53:33+08:00",
+      "committerDate": "2026-07-27T09:53:33+08:00",
+      "subject": "feat: 补充pollOctreeStreamingComplete在进度条结束后终止、foreground pending保留窗口"
+    },
+    {
+      "sha": "23117d5e1a8a7f9b8831e61830b5a0d328eeaeda",
+      "parents": "1314aa1cc417bf0e0a467720ecec5257297f7f1e",
+      "authorDate": "2026-07-29T17:44:48+08:00",
+      "committerDate": "2026-07-29T17:44:48+08:00",
+      "subject": "feat: 引入投影密度自适应"
+    },
+    {
+      "sha": "e094ab3c6fd3edc07019653b0b72c6ececf2bce4",
+      "parents": "23117d5e1a8a7f9b8831e61830b5a0d328eeaeda",
+      "authorDate": "2026-07-29T17:45:16+08:00",
+      "committerDate": "2026-07-29T17:45:16+08:00",
+      "subject": "feat: 引入lodScaleAlign"
+    },
+    {
+      "sha": "d09a4a4bba0abd39f5f38b1db254134f2cc6635a",
+      "parents": "e094ab3c6fd3edc07019653b0b72c6ececf2bce4",
+      "authorDate": "2026-07-31T14:25:56+08:00",
+      "committerDate": "2026-07-31T14:25:56+08:00",
+      "subject": "feat: 引入lodDistanceScale新计算方式（根据farTargetLod）"
+    },
+    {
+      "sha": "bad91848aa6c7266fdc08b82df4138f10fdc4c5f",
+      "parents": "348fe11b1535e3675c42b1bfdbe5c4c7c5353c13",
+      "authorDate": "2026-08-04T16:09:46+08:00",
+      "committerDate": "2026-08-04T16:09:46+08:00",
+      "subject": "feat: 新增centerJumpLadder为1、边缘ladder为2/3，benchmarkHud新增关于budget相关指标"
+    },
+    {
+      "sha": "b012c9be46c618df0f261c4e75e666f5ca769644",
+      "parents": "ceef9a24dabd6aaa97c519c820e6eaf70048e51b",
+      "authorDate": "2026-08-05T15:50:21+08:00",
+      "committerDate": "2026-08-05T15:50:21+08:00",
+      "subject": "feat: 采取2/2/3 ladder、主要计算视野中央待上屏chunk"
+    },
+    {
+      "sha": "257aeb88e9aa32661f2189393558a2e3d309a798",
+      "parents": "25b5c81c21107d195a76690259060fbf418527be",
+      "authorDate": "2026-08-10T17:18:04+08:00",
+      "committerDate": "2026-08-10T17:18:04+08:00",
+      "subject": "feat: 视锥内部顶满budget即可"
+    },
+    {
+      "sha": "bde8e76fc482640a421ca2e65d2bcce6d0bda853",
+      "parents": "257aeb88e9aa32661f2189393558a2e3d309a798",
+      "authorDate": "2026-08-10T19:05:06+08:00",
+      "committerDate": "2026-08-10T19:05:06+08:00",
+      "subject": "feat: 视锥外新增oofDowngrade"
+    },
+    {
+      "sha": "d3559d7da7d9e1fe625c5d11120ade9e4ae1e499",
+      "parents": "9453ba3e2396b55666466f0251a83ef452f7e7b3",
+      "authorDate": "2026-08-11T15:45:44+08:00",
+      "committerDate": "2026-08-11T15:45:44+08:00",
+      "subject": "feat: 修改默认budget"
+    },
+    {
+      "sha": "4d56e99425fabffddeefddb37d0269044997def2",
+      "parents": "d3559d7da7d9e1fe625c5d11120ade9e4ae1e499",
+      "authorDate": "2026-08-11T16:48:26+08:00",
+      "committerDate": "2026-08-11T16:48:26+08:00",
+      "subject": "feat: 默认走性能模式"
+    },
+    {
+      "sha": "c34695605854a1d87f88e4265378d197398b6159",
+      "parents": "8005ff8c6ad5684890e6c023193ba2524716c47e",
+      "authorDate": "2026-08-10T15:58:25+08:00",
+      "committerDate": "2026-08-13T09:35:26+08:00",
+      "subject": "feat: renderScale相关优化"
+    },
+    {
+      "sha": "e4bb3315f5529dcfd4b2ea7edbca545f003e5025",
+      "parents": "c34695605854a1d87f88e4265378d197398b6159",
+      "authorDate": "2026-08-13T10:19:16+08:00",
+      "committerDate": "2026-08-13T10:19:16+08:00",
+      "subject": "fix: 修复已下未上屏卡住的问题"
+    },
+    {
+      "sha": "6f929a75feb340b9992441a154af799f5e0ce3c2",
+      "parents": "e4bb3315f5529dcfd4b2ea7edbca545f003e5025",
+      "authorDate": "2026-08-13T10:34:09+08:00",
+      "committerDate": "2026-08-13T10:34:09+08:00",
+      "subject": "feat: 引入renderScale、默认关"
+    }
+  ],
+  "files": [
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/docs/大场景LOD优化项目介绍-STAR.md",
+      "sha256": "7c13ef7b828ac117f36056a5b95d3a62c697a4c283b76fb365e4f4c197ecee75"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/docs/本地大场景测试验证集.md",
+      "sha256": "0f00965fff4ab94972d0ac1e40dfe1fec17c1e10c797244fa9b46ac9615085ad"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/docs/大场景评测（Playcanvas 2.20版）.md",
+      "sha256": "a24b5b59b7273547b991a8888d0d96e37453f6aa3d0f436054d1321efde7dadb"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/docs/大场景评测（Playcanvas 2.20版） .md",
+      "sha256": "acc731fe50a3b079d0f92f1d11cdeb71ebf7ea2a1d1a716d1c6481193ce580c5"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/.cursor/skills/run-scene-profile-benchmark/SKILL.md",
+      "sha256": "3743e3c9167016a4824b061138a1a82b571ab4b9875938c318a7bcbecb278831"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/src/loaders/gsplat/lod/scene-bindings.ts",
+      "sha256": "0a40443e4391465cae0f1f9ff64089cda4c1e64d6a71df496134f7f702bd786d"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/src/index.ts",
+      "sha256": "419d16b0ed9941722f24afe4b322fd6249558cb58142f948d4a2b9e1b1d345e0"
+    }
+  ],
+  "branchOrigins": {
+    "wlq_dev_v5": "ac938faa wlq_dev_v5@{2026-06-18 11:34:31 +0800}: branch: Created from wlq_dev_v4",
+    "wlq_dev_v5_benchmark": "7cd481ca wlq_dev_v5_benchmark@{2026-07-23 16:55:36 +0800}: branch: Created from wlq_dev_v5"
+  },
+  "limitations": [
+    "Initial 96k/256k/512k three-way run not fully located.",
+    "Current skill file has no tracked creation commit in available history.",
+    "Branch tips are mutable; experimental and integration commits differ."
+  ]
+}

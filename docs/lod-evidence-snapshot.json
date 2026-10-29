@@ -1,0 +1,762 @@
+{
+  "auditedAt": "2026-10-28T03:37:27.216616+00:00",
+  "scope": "Local code identity and historical report extraction; not a current-version performance run.",
+  "repositories": [
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer",
+      "head": "2aeb02aad8496fc3c73d08a63676f024760a30e3",
+      "headDate": "2026-10-21T16:29:14+08:00",
+      "trackedChanges": "M scripts/proxy-server.js"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/splat-transform",
+      "head": "16c9f36f738c43f3392933b687bf14c566955ce4",
+      "headDate": "2026-09-07T16:11:41+08:00",
+      "trackedChanges": ""
+    }
+  ],
+  "files": [
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/src/loaders/gsplat/lod/octree/refinement-controller.ts",
+      "bytes": 124691,
+      "sha256": "8e61bea1b5a8a76b48347a0325b59dd7a5b1c55f69918b8ef58b845467451e9c"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/src/loaders/gsplat/lod/octree/out-of-frustum-downgrade.ts",
+      "bytes": 27288,
+      "sha256": "96e868122a35b86e32aa7022887dbc46720b758ecf4a73309a08b79ea0a92fa4"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/public/vendor/playcanvas-2.20.0.js",
+      "bytes": 2292549,
+      "sha256": "17ba5063a3ae9c012793768a55738b602079d49e374b67d3657df5b4b45edd89"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/public/index.html",
+      "bytes": 62848,
+      "sha256": "98bf0b640c467d5778324fde3975a89e8736ead143960c63a72e835c598c5bf1"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/package-lock.json",
+      "bytes": 333850,
+      "sha256": "29c701c1d94d94c30f9983ecc99e15ae124b94a7069a8d72f85ab95f95fdbf92"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/splat-transform/src/lib/lod/lod-plan.ts",
+      "bytes": 23280,
+      "sha256": "70c3a3e6bb9f16674251dcb87203cedf0e65fa9bd498ea80cde6cb4692daa29f"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/splat-transform/src/lib/writers/write-lod.ts",
+      "bytes": 62895,
+      "sha256": "6fca0b47bf2baba48b4a7f613162a562c21b11ef3e77cce6ebd1ff00338084ad"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/splat-transform/package-lock.json",
+      "bytes": 149292,
+      "sha256": "75067752db3f6b29405bd898ea5535b64b5a958c55116c34cf1028932f6d0b44"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/benchmark-reports/2026-08-11/poland-leaf-ladder/results.json",
+      "bytes": 8741,
+      "sha256": "7aa6ae7145a0245a9b7f64aa246a288b555e449cf9b9f27addb4fb06aaf7a9d9"
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/supersplat-viewer/benchmark-reports/2026-08-12/scene-chengjian-v7-kf1-budget-repeats/results.json",
+      "bytes": 47156,
+      "sha256": "f88615e4158d8f9f39e52f6f9500be7f1463bb89f4857fdb5392610787579a85"
+    }
+  ],
+  "assets": [
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/splat-transform/assets/sanlitun/lod-meta.json",
+      "bytes": 2940044,
+      "sha256": "d433931631bf7e9ca7ea25557b5eaf83bddeb5891c646e273138e44ed849775e",
+      "asset": {
+        "generator": "splat-transform v3.3.0",
+        "chunkGaussians": 98304,
+        "chunkExtent": 10
+      },
+      "counts": [
+        41845254,
+        20922627,
+        10461314,
+        5230657,
+        2615329,
+        1307665,
+        653833,
+        326917,
+        163459
+      ],
+      "lodLevels": 9,
+      "physicalFiles": 924,
+      "nodesWithLods": 4400,
+      "limitation": "Metadata hash only; SOG payloads are not hashed. Generator version does not prove source commit."
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/splat-transform/assets/soho-restore/lod-meta.json",
+      "bytes": 4709097,
+      "sha256": "610131ca7377b9a405e2280e4c78cd6ea4221788b8125bf89b8adb931dee38bd",
+      "asset": {
+        "generator": "splat-transform v3.3.0",
+        "chunkGaussians": 98304,
+        "chunkExtent": 10
+      },
+      "counts": [
+        94337870,
+        47168935,
+        23584468,
+        11792234,
+        5896117,
+        2948059,
+        1474030,
+        737015,
+        368508,
+        184254
+      ],
+      "lodLevels": 10,
+      "physicalFiles": 2119,
+      "nodesWithLods": 6501,
+      "limitation": "Metadata hash only; SOG payloads are not hashed. Generator version does not prove source commit."
+    },
+    {
+      "path": "/Users/leqiwan/Desktop/shuyuan_wlq/大场景渲染/splat-transform/assets/wuhan/wuhan-v9/lod-meta.json",
+      "bytes": 1099033,
+      "sha256": "092c3317d3fbe10da66c9b0d4b41cb3bbff3e446ade0a03765cf224531d8e08c",
+      "asset": {
+        "generator": "splat-transform v3.2.0"
+      },
+      "counts": [
+        18509429,
+        9254715,
+        4627358,
+        2313679,
+        1156840,
+        578420,
+        289210,
+        144605,
+        72303
+      ],
+      "lodLevels": 9,
+      "physicalFiles": 428,
+      "nodesWithLods": 897,
+      "limitation": "Metadata hash only; SOG payloads are not hashed. Generator version does not prove source commit."
+    }
+  ],
+  "historicalLeafLadder": [
+    {
+      "sceneId": "poland-96k-hard",
+      "label": "hard · extent=0 · ~4096 leaves",
+      "leaves": 4096,
+      "firstUsefulMs": 5413,
+      "frameMs": {
+        "n": 5241,
+        "p50": 16.7,
+        "p90": 17.2,
+        "max": 17.8,
+        "avg": 16.666609425680868
+      },
+      "updateMs": {
+        "n": 5241,
+        "p50": 6.2,
+        "p90": 8.2,
+        "max": 16.4,
+        "avg": 6.227494752909735
+      },
+      "gpuMs": {
+        "n": 5241,
+        "p50": 17.3,
+        "p90": 20.2,
+        "max": 28.9,
+        "avg": 16.75514214844501
+      },
+      "totalBlocks": {
+        "n": 5241,
+        "p50": 4096,
+        "p90": 4096,
+        "max": 4096,
+        "avg": 4096
+      },
+      "gsplatsM": {
+        "n": 5241,
+        "p50": 2.19216,
+        "p90": 2.404989,
+        "max": 2.461589,
+        "avg": 1.9297126014119552
+      },
+      "blurToClearMs": {
+        "n": 4,
+        "p50": 11899.900000095367,
+        "p90": 21158.200000047684,
+        "max": 33832.90000009537,
+        "avg": 19240.600000023842
+      },
+      "timeoutCount": 0
+    },
+    {
+      "sceneId": "poland-96k-C-ext10-min8k",
+      "label": "C · extent=10 min8k · ~32752 leaves",
+      "leaves": 32752,
+      "firstUsefulMs": 15472,
+      "frameMs": {
+        "n": 1184,
+        "p50": 66.7,
+        "p90": 99.9,
+        "max": 166.7,
+        "avg": 70.70633445945961
+      },
+      "updateMs": {
+        "n": 1184,
+        "p50": 49.8,
+        "p90": 63.9,
+        "max": 106.6,
+        "avg": 50.07086148648641
+      },
+      "gpuMs": {
+        "n": 1184,
+        "p50": 28.8,
+        "p90": 45.7,
+        "max": 56.2,
+        "avg": 30.043327702702697
+      },
+      "totalBlocks": {
+        "n": 1184,
+        "p50": 32752,
+        "p90": 32752,
+        "max": 32752,
+        "avg": 32601.760135135137
+      },
+      "gsplatsM": {
+        "n": 1184,
+        "p50": 2.063965,
+        "p90": 2.328211,
+        "max": 2.3782,
+        "avg": 1.9349025168918987
+      },
+      "blurToClearMs": {
+        "n": 4,
+        "p50": 6503.099999904633,
+        "p90": 26060.599999904633,
+        "max": 33729.60000014305,
+        "avg": 18001.67500001192
+      },
+      "timeoutCount": 0
+    },
+    {
+      "sceneId": "poland-96k-B-ext10-min16k",
+      "label": "B · extent=10 min16k · ~16384 leaves",
+      "leaves": 16384,
+      "firstUsefulMs": 10370,
+      "frameMs": {
+        "n": 3060,
+        "p50": 25.7,
+        "p90": 41.7,
+        "max": 91.6,
+        "avg": 29.537679738562325
+      },
+      "updateMs": {
+        "n": 3060,
+        "p50": 21.5,
+        "p90": 29.9,
+        "max": 57.4,
+        "avg": 22.772875816993466
+      },
+      "gpuMs": {
+        "n": 3060,
+        "p50": 26.6,
+        "p90": 37.1,
+        "max": 58.9,
+        "avg": 26.684575163398723
+      },
+      "totalBlocks": {
+        "n": 3060,
+        "p50": 16384,
+        "p90": 16384,
+        "max": 16384,
+        "avg": 16375.18954248366
+      },
+      "gsplatsM": {
+        "n": 3060,
+        "p50": 2.190328,
+        "p90": 2.387791,
+        "max": 2.429428,
+        "avg": 1.9821803496731911
+      },
+      "blurToClearMs": {
+        "n": 4,
+        "p50": 10332.700000047684,
+        "p90": 27630,
+        "max": 33528,
+        "avg": 19501.000000059605
+      },
+      "timeoutCount": 0
+    }
+  ],
+  "historicalBudgetRepeats": [
+    {
+      "budget": 2.5,
+      "runs": 3,
+      "firstFrameMs": [
+        4456.100000143051,
+        4831.5,
+        4542.600000143051
+      ],
+      "firstFrameMedianMs": 4542.600000143051,
+      "cases": [
+        {
+          "label": "cj-b2.5-r1",
+          "gsplatsAvgM": 2.4177165,
+          "vramTexPeakMb": 259.5785093307495,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 5201,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 60,
+              "gsplatsAtClearM": 2.406236,
+              "jsHeapAtClearMb": 221.67060947418213,
+              "vramTexAtClearMb": 220.5991086959839,
+              "jsHeapPeakDuringRefineMb": 238.60475635528564,
+              "vramTexPeakDuringRefineMb": 224.2726926803589,
+              "screenshotPath": "screenshots/cj-b2.5-r1/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 965.8999998569489,
+              "blurToClearMs": 3399.7999999523163,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 23,
+              "pendingPeakNodes": 30,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.429197,
+              "jsHeapAtClearMb": 272.9103374481201,
+              "vramTexAtClearMb": 252.717791557312,
+              "jsHeapPeakDuringRefineMb": 298.0189266204834,
+              "vramTexPeakDuringRefineMb": 259.5785093307495,
+              "screenshotPath": "screenshots/cj-b2.5-r1/kf-1.jpg"
+            }
+          ]
+        },
+        {
+          "label": "cj-b2.5-r2",
+          "gsplatsAvgM": 2.426617,
+          "vramTexPeakMb": 255.1551694869995,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 4800.800000190735,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.406236,
+              "jsHeapAtClearMb": 216.15699005126953,
+              "vramTexAtClearMb": 219.18681621551514,
+              "jsHeapPeakDuringRefineMb": 224.09888076782227,
+              "vramTexPeakDuringRefineMb": 220.95341777801514,
+              "screenshotPath": "screenshots/cj-b2.5-r2/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 950.2000000476837,
+              "blurToClearMs": 3206.4000000953674,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 15,
+              "pendingPeakNodes": 21,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.446998,
+              "jsHeapAtClearMb": 279.3142080307007,
+              "vramTexAtClearMb": 253.3653745651245,
+              "jsHeapPeakDuringRefineMb": 313.11840534210205,
+              "vramTexPeakDuringRefineMb": 255.1551694869995,
+              "screenshotPath": "screenshots/cj-b2.5-r2/kf-1.jpg"
+            }
+          ]
+        },
+        {
+          "label": "cj-b2.5-r3",
+          "gsplatsAvgM": 2.406236,
+          "vramTexPeakMb": 226.1235990524292,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 19400.799999952316,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.406236,
+              "jsHeapAtClearMb": 216.53140544891357,
+              "vramTexAtClearMb": 212.48234844207764,
+              "jsHeapPeakDuringRefineMb": 226.71255207061768,
+              "vramTexPeakDuringRefineMb": 212.48234844207764,
+              "screenshotPath": "screenshots/cj-b2.5-r3/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 966.4000000953674,
+              "blurToClearMs": null,
+              "refineTimedOut": true,
+              "pendingNodesAtArrival": 26,
+              "pendingPeakNodes": 28,
+              "refinementRatioAtClear": null,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 58,
+              "gsplatsAtClearM": null,
+              "jsHeapAtClearMb": null,
+              "vramTexAtClearMb": null,
+              "jsHeapPeakDuringRefineMb": 245.7461404800415,
+              "vramTexPeakDuringRefineMb": 226.1235990524292,
+              "screenshotPath": "screenshots/cj-b2.5-r3/kf-1.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "budget": 4,
+      "runs": 3,
+      "firstFrameMs": [
+        97418.79999995232,
+        3867.5999999046326,
+        3684
+      ],
+      "firstFrameMedianMs": 3867.5999999046326,
+      "cases": [
+        {
+          "label": "cj-b4-r1",
+          "gsplatsAvgM": 3.2028925,
+          "vramTexPeakMb": 316.1515760421753,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 3600.7000000476837,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.554816,
+              "jsHeapAtClearMb": 245.5350217819214,
+              "vramTexAtClearMb": 262.69642162323,
+              "jsHeapPeakDuringRefineMb": 254.41934394836426,
+              "vramTexPeakDuringRefineMb": 262.69642162323,
+              "screenshotPath": "screenshots/cj-b4-r1/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 965.5,
+              "blurToClearMs": 4600.700000047684,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 28,
+              "pendingPeakNodes": 36,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 59,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 3.850969,
+              "jsHeapAtClearMb": 299.09435653686523,
+              "vramTexAtClearMb": 312.59487438201904,
+              "jsHeapPeakDuringRefineMb": 343.3946752548218,
+              "vramTexPeakDuringRefineMb": 316.1515760421753,
+              "screenshotPath": "screenshots/cj-b4-r1/kf-1.jpg"
+            }
+          ]
+        },
+        {
+          "label": "cj-b4-r2",
+          "gsplatsAvgM": 3.231318,
+          "vramTexPeakMb": 313.1169538497925,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 3601.100000143051,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.554816,
+              "jsHeapAtClearMb": 202.91690349578857,
+              "vramTexAtClearMb": 262.626841545105,
+              "jsHeapPeakDuringRefineMb": 256.4304323196411,
+              "vramTexPeakDuringRefineMb": 262.626841545105,
+              "screenshotPath": "screenshots/cj-b4-r2/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 950.2999999523163,
+              "blurToClearMs": 4999.899999856949,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 28,
+              "pendingPeakNodes": 37,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 3.90782,
+              "jsHeapAtClearMb": 303.64638900756836,
+              "vramTexAtClearMb": 312.0534772872925,
+              "jsHeapPeakDuringRefineMb": 303.64638900756836,
+              "vramTexPeakDuringRefineMb": 313.1169538497925,
+              "screenshotPath": "screenshots/cj-b4-r2/kf-1.jpg"
+            }
+          ]
+        },
+        {
+          "label": "cj-b4-r3",
+          "gsplatsAvgM": 3.207942,
+          "vramTexPeakMb": 326.6403913497925,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 3607.5,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.554816,
+              "jsHeapAtClearMb": 225.65937900543213,
+              "vramTexAtClearMb": 253.23475170135498,
+              "jsHeapPeakDuringRefineMb": 232.14178562164307,
+              "vramTexPeakDuringRefineMb": 271.62800121307373,
+              "screenshotPath": "screenshots/cj-b4-r3/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 966.2999999523163,
+              "blurToClearMs": 3998.7000000476837,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 28,
+              "pendingPeakNodes": 38,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 3.861068,
+              "jsHeapAtClearMb": 315.0972557067871,
+              "vramTexAtClearMb": 317.7109479904175,
+              "jsHeapPeakDuringRefineMb": 325.31086444854736,
+              "vramTexPeakDuringRefineMb": 326.6403913497925,
+              "screenshotPath": "screenshots/cj-b4-r3/kf-1.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "budget": 6,
+      "runs": 3,
+      "firstFrameMs": [
+        3794.7000000476837,
+        3886.300000190735,
+        4111.800000190735
+      ],
+      "firstFrameMedianMs": 3886.300000190735,
+      "cases": [
+        {
+          "label": "cj-b6-r1",
+          "gsplatsAvgM": 3.5869290000000005,
+          "vramTexPeakMb": 354.19880199432373,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 3600.2000000476837,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 60,
+              "gsplatsAtClearM": 2.554816,
+              "jsHeapAtClearMb": 196.49384307861328,
+              "vramTexAtClearMb": 309.852915763855,
+              "jsHeapPeakDuringRefineMb": 235.79908752441406,
+              "vramTexPeakDuringRefineMb": 309.852915763855,
+              "screenshotPath": "screenshots/cj-b6-r1/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 966.2999999523163,
+              "blurToClearMs": 3199.199999809265,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 27,
+              "pendingPeakNodes": 33,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 60,
+              "gsplatsAtClearM": 4.619042,
+              "jsHeapAtClearMb": 265.8890619277954,
+              "vramTexAtClearMb": 341.4379987716675,
+              "jsHeapPeakDuringRefineMb": 300.6763029098511,
+              "vramTexPeakDuringRefineMb": 354.19880199432373,
+              "screenshotPath": "screenshots/cj-b6-r1/kf-1.jpg"
+            }
+          ]
+        },
+        {
+          "label": "cj-b6-r2",
+          "gsplatsAvgM": 3.5918555000000003,
+          "vramTexPeakMb": 352.27265453338623,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 3400.9000000953674,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 59,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.554816,
+              "jsHeapAtClearMb": 205.08234691619873,
+              "vramTexAtClearMb": 310.01282787323,
+              "jsHeapPeakDuringRefineMb": 243.309983253479,
+              "vramTexPeakDuringRefineMb": 310.01282787323,
+              "screenshotPath": "screenshots/cj-b6-r2/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 949.7000000476837,
+              "blurToClearMs": 2400.4000000953674,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 29,
+              "pendingPeakNodes": 32,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 4.628895,
+              "jsHeapAtClearMb": 281.5839443206787,
+              "vramTexAtClearMb": 339.78742504119873,
+              "jsHeapPeakDuringRefineMb": 299.71621894836426,
+              "vramTexPeakDuringRefineMb": 352.27265453338623,
+              "screenshotPath": "screenshots/cj-b6-r2/kf-1.jpg"
+            }
+          ]
+        },
+        {
+          "label": "cj-b6-r3",
+          "gsplatsAvgM": 3.5869290000000005,
+          "vramTexPeakMb": 364.16694164276123,
+          "interactionWaypoints": [
+            {
+              "label": "kf-0",
+              "keyframeIndex": 0,
+              "animTimeSec": 0,
+              "moveMs": 0,
+              "blurToClearMs": 3600.100000143051,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 64,
+              "pendingPeakNodes": 64,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 60,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 59,
+              "gsplatsAtClearM": 2.554816,
+              "jsHeapAtClearMb": 205.83179378509521,
+              "vramTexAtClearMb": 313.48224925994873,
+              "jsHeapPeakDuringRefineMb": 226.6736249923706,
+              "vramTexPeakDuringRefineMb": 313.48224925994873,
+              "screenshotPath": "screenshots/cj-b6-r3/kf-0.jpg"
+            },
+            {
+              "label": "kf-1",
+              "keyframeIndex": 1,
+              "animTimeSec": 1,
+              "moveMs": 964.2000000476837,
+              "blurToClearMs": 3600,
+              "refineTimedOut": false,
+              "pendingNodesAtArrival": 32,
+              "pendingPeakNodes": 34,
+              "refinementRatioAtClear": 1,
+              "fpsP50DuringRefine": 59,
+              "fpsP95DuringRefine": 60,
+              "fpsMinDuringRefine": 58,
+              "gsplatsAtClearM": 4.619042,
+              "jsHeapAtClearMb": 273.26230907440186,
+              "vramTexAtClearMb": 356.13263988494873,
+              "jsHeapPeakDuringRefineMb": 310.8842878341675,
+              "vramTexPeakDuringRefineMb": 364.16694164276123,
+              "screenshotPath": "screenshots/cj-b6-r3/kf-1.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Historical reports are not bound to current source/vendor/asset hashes.",
+    "Frame samples and camera poses are not independent repeated runs.",
+    "No new browser/GPU experiments were performed.",
+    "Local HEAD is not verified as the deployed production version."
+  ]
+}
