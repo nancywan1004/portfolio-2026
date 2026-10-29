@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import * as THREE from 'three'
 
-type Kind = 'work' | 'experience' | 'about' | 'contact'
+type Kind = 'work' | 'background' | 'labs' | 'contact'
 type RingSpec = { radius: number; squash: number; rotation: number }
 type ClusterSpec = { nx: number; ny: number; dir: number; rings: RingSpec[] }
 
@@ -23,7 +23,7 @@ const layouts: Record<Kind, ClusterSpec[]> = {
       { radius: .66, squash: .22, rotation: -.42 },
     ] },
   ],
-  experience: [
+  background: [
     { nx: 1.04, ny: 0, dir: 1, rings: [
       { radius: .86, squash: .62, rotation: -.36 },
       { radius: .7, squash: .5, rotation: -.36 },
@@ -34,7 +34,7 @@ const layouts: Record<Kind, ClusterSpec[]> = {
       { radius: .46, squash: .34, rotation: .5 },
     ] },
   ],
-  about: [
+  labs: [
     { nx: 1, ny: -0.02, dir: 1, rings: [
       { radius: .72, squash: .68, rotation: .24 },
       { radius: .9, squash: .84, rotation: .24 },

@@ -7,10 +7,111 @@ export const profile = {
   phone: '(+86) 17813278350',
   github: 'https://github.com/nancywan1004'
 }
-export const projects = [
-  { id: '01', title: 'Universe', category: '三维重建与创作平台', year: '2026', tags: 'PlayCanvas · 3DGS · GLSL / WGSL', description: '面向 3DGS 场景重建、编辑与交互的 SaaS 平台。负责三维前端开发，工作包括重光照、大场景 LOD 流式调度与 Shader 特效系统。', detail: '三维前端开发 / 重光照 · 大场景 LOD · Shader 特效' },
-  { id: '02', title: '交互作品集', category: '个人实践', year: '2026', tags: 'Vue · TypeScript · Three.js · GSAP', description: '基于 Vue、TypeScript、Three.js 与 GSAP 实现的个人作品集，包含程序化几何交互、项目内容展示与本地问答原型。', detail: '当前作品集的设计与开发实践。程序化轨道装置支持旋转、悬停联动与内容导航；助手采用本地预设回答。' },
+
+// 简历下载：文件实体位于 public/resume/，必须保持普通 Git 对象（不能进 LFS），
+// 否则 Vercel 部署后拿到的是指针文件。filename 仅决定浏览器保存时的文件名。
+export const resume = {
+  href: '/resume/wan-leqi-resume-2026-10.pdf',
+  filename: '万乐琪简历_2026.10.pdf',
+  meta: 'PDF · 2026.10 · 2.2 MB'
+}
+
+export type ProjectKind = 'work' | 'personal'
+export type ProjectStatus = 'published' | 'draft'
+export type Project = {
+  id: string
+  kind: ProjectKind
+  title: string
+  category: string
+  year: string
+  tags: string
+  description: string
+  detail: string
+  status: ProjectStatus
+}
+
+export const projects: Project[] = [
+  {
+    id: '01', kind: 'work', title: 'Universe', category: '三维重建与创作平台', year: '2026',
+    tags: 'PlayCanvas · 3DGS · GLSL / WGSL',
+    description: '面向 3DGS 场景重建、编辑与交互的 SaaS 平台。负责三维前端开发，工作包括重光照、大场景 LOD 流式调度与 Shader 特效系统。',
+    detail: '三维前端开发 / 重光照 · 大场景 LOD · Shader 特效',
+    status: 'published'
+  },
+  {
+    id: '02', kind: 'work', title: 'AI + AR 随身导览', category: '大模型问答与空间定位', year: '2024 — 至今',
+    tags: '小程序 · 大模型 · VPS AR · 流式问答',
+    description: '面向文旅场景的 AI + AR 导览小程序，集成大模型问答与 VPS AR 定位，支撑现场示范应用落地。',
+    detail: '案例整理中：将补充技术选型、流式问答链路、YUV 转换与端上性能处理。',
+    status: 'draft'
+  },
+  {
+    id: '03', kind: 'work', title: 'YumeGO AR', category: '移动端 AR 游戏', year: '2022 — 2024',
+    tags: 'iOS / Android · Unity · AR Foundation · Lua',
+    description: '与时尚品牌合作的多人多地 AR 寻宝游戏，融合协作解谜玩法与 AI 对话体验，已在全球上线。',
+    detail: '案例整理中：将补充多人同步、玩法编排与上线迭代过程。',
+    status: 'draft'
+  },
+  {
+    id: '04', kind: 'work', title: 'Yumebau VR', category: 'Meta Quest 自研游戏', year: '2022 — 2024',
+    tags: 'Unity · Meta Quest · VR UI · 中台工具',
+    description: '自研 VR 游戏 IP 的内容配置系统、腕带 UI 菜单与中台软件包研发。',
+    detail: '案例整理中：将补充内容管线、运行时热补丁与编辑器扩展。',
+    status: 'draft'
+  },
+  {
+    id: '05', kind: 'personal', title: 'WebGPU Shader 实验', category: '实时图形', year: '进行中',
+    tags: 'WebGPU · WGSL · 计算着色器',
+    description: '以 WGSL 编写的着色实验，用于验证 WebGPU 渲染管线与计算着色器的表达能力。',
+    detail: '实验整理中：将补充管线搭建、与 WebGL 实现的对照及可视化记录。',
+    status: 'draft'
+  },
+  {
+    id: '06', kind: 'personal', title: '视角覆盖分析器', category: '图形工具', year: '进行中',
+    tags: 'TypeScript · 几何计算 · 可视化',
+    description: '分析三维场景的相机视角覆盖情况，解决视角不全与二维投影到三维的多视角一致性问题。',
+    detail: '工具整理中：将补充覆盖判定方法、投影一致性校验与结果可视化。',
+    status: 'draft'
+  },
 ]
+
+export type Exploration = {
+  id: string
+  title: string
+  topic: string
+  status: string
+  summary: string
+  notes: string[]
+}
+
+export const explorations: Exploration[] = [
+  {
+    id: '01', title: 'WebGPU 渲染管线', topic: '实时图形 / 管线迁移', status: '待补充',
+    summary: '对照 WebGPU 与 WebGL 在 3DGS 渲染与后处理链路中的可行性、限制与迁移成本。',
+    notes: [
+      '待补充：计算着色器与存储缓冲区的适用边界',
+      '待补充：与现有 WebGL 后处理并行维护的取舍',
+      '待补充：同一场景的可比指标与测试条件',
+    ]
+  },
+  {
+    id: '02', title: '3DGS 重光照与阴影', topic: '实时图形 / 光照', status: '待补充',
+    summary: '世界空间亮度场的烘焙方式、同源重投影与相关回归项，整理已验证与仍未闭环的部分。',
+    notes: [
+      '待补充：笔刷半径与世界空间亮度体积的映射',
+      '待补充：相机时序、近景点阵与预览提交跳变的回归清单',
+    ]
+  },
+  {
+    id: '03', title: 'AR 空间定位（VPS）', topic: '空间计算 / 定位', status: '待补充',
+    summary: 'VPS 定位精度、弱网降级与端上性能的验证方法，以及现场部署中出现的边界情况。',
+    notes: [
+      '待补充：定位精度与重定位耗时的测试条件',
+      '待补充：资产预加载、内存与环境贴图的端上表现',
+    ]
+  },
+]
+
 export const experience = [
   {
     period: '05/24 — 至今',

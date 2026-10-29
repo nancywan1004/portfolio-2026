@@ -50,8 +50,8 @@ function rememberChapter(event: Event) {
 .chapter-summary:focus-visible{outline:1px solid var(--ink);outline-offset:6px}
 .chapter-summary:hover .chapter-action{color:var(--ink)}
 .chapter-number{font-size:25px;align-self:start;padding-top:4px;color:#8c8d81;font-variant-numeric:tabular-nums}
-.chapter-overview h3{font-size:clamp(23px,2.6vw,36px);line-height:1.5;letter-spacing:-.025em;font-weight:400;margin:0 0 10px}
-.chapter-overview p{max-width:620px;font-size:13px;line-height:1.9;color:#6a6c61;margin:0}
+.chapter-overview h3{font-size:clamp(19px,1.8vw,26px);line-height:1.4;letter-spacing:-.02em;font-weight:400;margin:0 0 10px}
+.chapter-overview p{max-width:620px;font-size:15px;line-height:1.85;color:#6a6c61;margin:0}
 .chapter-action{display:block;font-size:10px;color:#86877b;margin-top:16px;letter-spacing:.04em}
 .chapter-cover{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;filter:saturate(.5);transition:filter .2s}
 .chapter-summary:hover .chapter-cover{filter:saturate(1)}
@@ -65,6 +65,6 @@ function rememberChapter(event: Event) {
 .case-chapter[open]>.chapter-summary{padding-bottom:30px;border-bottom:1px solid var(--rule)}
 .chapter-content{padding:32px 0 45px}
 @media(max-width:850px){.chapter-summary{grid-template-columns:40px minmax(0,1fr) 120px 24px;gap:18px}.chapter-number{font-size:23px}}
-@media(max-width:600px){.chapter-summary{grid-template-columns:28px minmax(0,1fr) 24px;gap:12px;padding:25px 0}.chapter-cover{grid-column:2;grid-row:2;width:112px;aspect-ratio:16/9}.chapter-toggle{grid-column:3;grid-row:1;align-self:start;margin-top:2px}.chapter-number{font-size:20px;padding-top:3px}.chapter-overview h3{font-size:23px;margin-bottom:8px}.chapter-overview p{font-size:12px;line-height:1.85}.chapter-action{font-size:10px;margin-top:12px}.chapter-content{padding:25px 0 30px}.case-chapter[open]>.chapter-summary{padding-bottom:25px}}
+@media(max-width:600px){.chapter-summary{grid-template-columns:28px minmax(0,1fr) 24px;gap:12px;padding:25px 0}.chapter-cover{grid-column:2;grid-row:2;width:112px;aspect-ratio:16/9}.chapter-toggle{grid-column:3;grid-row:1;align-self:start;margin-top:2px}.chapter-number{font-size:20px;padding-top:3px}.chapter-overview h3{font-size:21px;margin-bottom:8px}.chapter-overview p{font-size:14px;line-height:1.85}.chapter-action{font-size:10px;margin-top:12px}.chapter-content{padding:25px 0 30px}.case-chapter[open]>.chapter-summary{padding-bottom:25px}}
 @media(prefers-reduced-motion:reduce){.chapter-summary,.chapter-cover,.chapter-toggle:after{transition:none}}
 </style>
