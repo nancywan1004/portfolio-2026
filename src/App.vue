@@ -4,6 +4,7 @@ import ArtScene from './components/ArtScene.vue'
 import StarMark from './components/StarMark.vue'
 import ProjectArtwork from './components/ProjectArtwork.vue'
 import UniverseCase from './components/UniverseCase.vue'
+import ExplorationCase from './components/ExplorationCase.vue'
 import ScrollField from './components/ScrollField.vue'
 import SideOrbit from './components/SideOrbit.vue'
 import { projects, explorations, experience, education, profile, skills, resume, featureFlags } from './content'
@@ -33,6 +34,10 @@ const title = ref<HTMLElement>()
 const questionField = ref<HTMLInputElement>()
 const messageList = ref<HTMLElement>()
 const selectedProject = ref<string | null>(null)
+const expandedExploration = ref<string | null>(null)
+function toggleExploration(id: string) {
+  expandedExploration.value = expandedExploration.value === id ? null : id
+}
 const activeSection = ref(0)
 const assistantEnabled = featureFlags.assistant
 const question = ref('')
@@ -77,7 +82,7 @@ const messages = ref<{ id: number; role: 'assistant' | 'user'; text: string; lin
 async function go(target: Page) {
   if (target === page.value) { window.scrollTo({ top: 0 }); return }
   if (target === 'chat') previousPage.value = page.value
-  page.value = target; highlighted.value = -1; selectedProject.value = null
+  page.value = target; highlighted.value = -1; selectedProject.value = null; expandedExploration.value = null
   if (location.hash !== '#' + target) location.hash = target
   window.scrollTo({ top: 0, behavior: 'instant' })
   await nextTick(); title.value?.focus({ preventScroll: true })
@@ -103,6 +108,19 @@ async function openLinkedCase() {
   target?.scrollIntoView({ behavior: 'instant' })
   target?.focus({ preventScroll: true })
 }
+async function openLinkedExploration() {
+  const match = location.hash.match(/^#labs\/([^/]+)(?:\/([^/]+))?$/)
+  if (!match) return
+  const item = explorations.find(entry => entry.id === match[1])
+  if (!item) return
+  expandedExploration.value = item.id
+  await nextTick()
+  const chapter = document.getElementById(match[2] || 'labs-case-' + item.id)
+  if (chapter instanceof HTMLDetailsElement) chapter.open = true
+  await nextTick()
+  chapter?.scrollIntoView({ behavior: 'instant' })
+  chapter?.focus({ preventScroll: true })
+}
 async function hashChange() {
   const target = readPage()
   if (target !== page.value) {
@@ -113,8 +131,9 @@ async function hashChange() {
     title.value?.focus({ preventScroll: true })
   }
   await openLinkedCase()
+  await openLinkedExploration()
 }
-onMounted(openLinkedCase)
+onMounted(() => { openLinkedCase(); openLinkedExploration() })
 let revealObserver: IntersectionObserver | undefined
 let sectionFrame = 0
 function trackSection() {
@@ -276,8 +295,8 @@ async function send(value = question.value) {
           <section id="background-skills" class="education-section skills-section" aria-labelledby="skills-title" data-section :data-index="6"><div class="education-heading"><p class="eyebrow">背景 / 技术</p><h2 id="skills-title" class="serif">技术背景</h2><p>编程语言、软件、硬件与 AI 工具</p></div><article v-for="group in skills" :key="group.label" class="skill-row reveal"><p class="eyebrow">{{ group.label }}</p><ul class="skill-items"><li v-for="item in group.items" :key="item">{{ item }}</li></ul></article></section>
         </template>
         <template v-else-if="page === 'labs'">
-          <p class="content-notice">探索记录 / 正在调研与测试的技术方向，标注状态与待补充项。</p>
-          <section class="editorial-rows" aria-label="技术探索"><article v-for="(item, index) in explorations" :key="item.id" :id="'labs-' + index" class="editorial-row reveal" data-section :data-index="index" v-tilt="1.2"><p class="eyebrow">{{ item.id }} / {{ item.topic }}</p><div><h2 class="serif">{{ item.title }}</h2><p class="row-place">{{ item.status }}</p></div><div class="row-detail"><p class="row-description">{{ item.summary }}</p><ul v-if="item.notes.length" class="row-points"><li v-for="note in item.notes" :key="note">{{ note }}</li></ul></div></article></section>
+          <p class="content-notice">探索记录 / 逐条记录测试条件、取舍与结论边界。</p>
+          <section class="editorial-rows" aria-label="技术探索"><article v-for="(item, index) in explorations" :key="item.id" :id="'labs-' + index" class="editorial-row reveal" data-section :data-index="index"><p class="eyebrow">{{ item.id }} / {{ item.topic }}</p><div><h2 class="serif">{{ item.title }}</h2><p class="row-place">{{ item.status }}</p></div><div class="row-detail"><p class="row-description">{{ item.summary }}</p><button class="text-link explore-toggle" :aria-expanded="expandedExploration === item.id" :aria-controls="'labs-case-' + item.id" @click="toggleExploration(item.id)">{{ expandedExploration === item.id ? '收起完整记录 −' : '展开完整记录 ↗' }}</button></div><div v-if="expandedExploration === item.id" :id="'labs-case-' + item.id" class="full-case-detail"><ExplorationCase /></div></article></section>
         </template>
         <template v-else-if="page === 'contact'">
           <section class="editorial-rows" aria-label="联系信息"><article id="contact-email" class="editorial-row reveal" data-section :data-index="0"><p class="eyebrow">邮箱</p><h2><a :href="'mailto:' + profile.email">{{ profile.email }}</a></h2><p class="row-description">优先通过邮件联系，可附项目背景与时间安排。</p></article><article id="contact-phone" class="editorial-row reveal" data-section :data-index="1"><p class="eyebrow">电话</p><h2><a :href="'tel:' + profile.phone.replace(/[^+\d]/g, '')">{{ profile.phone }}</a></h2><p class="row-description">如需即时沟通，可以直接拨打。</p></article><article id="contact-github" class="editorial-row reveal" data-section :data-index="2"><p class="eyebrow">GitHub</p><h2><a :href="profile.github" target="_blank" rel="noreferrer">github.com/nancywan1004</a></h2><p class="row-description">代码仓库入口。</p></article></section><div class="contact-action"><p class="serif">实时三维与交互开发相关合作</p><a class="text-link" :href="'mailto:' + profile.email">写邮件 ↗</a></div>

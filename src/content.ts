@@ -81,34 +81,17 @@ export type Exploration = {
   topic: string
   status: string
   summary: string
-  notes: string[]
 }
 
+// 探索正文结构较长且含图片、录屏与步骤层级，正文写在 ExplorationCase.vue，
+// 这里只保留列表行所需的信息与用于深链的 id。
 export const explorations: Exploration[] = [
   {
-    id: '01', title: 'WebGPU 渲染管线', topic: '实时图形 / 管线迁移', status: '待补充',
-    summary: '对照 WebGPU 与 WebGL 在 3DGS 渲染与后处理链路中的可行性、限制与迁移成本。',
-    notes: [
-      '待补充：计算着色器与存储缓冲区的适用边界',
-      '待补充：与现有 WebGL 后处理并行维护的取舍',
-      '待补充：同一场景的可比指标与测试条件',
-    ]
-  },
-  {
-    id: '02', title: '3DGS 重光照与阴影', topic: '实时图形 / 光照', status: '待补充',
-    summary: '世界空间亮度场的烘焙方式、同源重投影与相关回归项，整理已验证与仍未闭环的部分。',
-    notes: [
-      '待补充：笔刷半径与世界空间亮度体积的映射',
-      '待补充：相机时序、近景点阵与预览提交跳变的回归清单',
-    ]
-  },
-  {
-    id: '03', title: 'AR 空间定位（VPS）', topic: '空间计算 / 定位', status: '待补充',
-    summary: 'VPS 定位精度、弱网降级与端上性能的验证方法，以及现场部署中出现的边界情况。',
-    notes: [
-      '待补充：定位精度与重定位耗时的测试条件',
-      '待补充：资产预加载、内存与环境贴图的端上表现',
-    ]
+    id: '01',
+    title: 'AI 辅助数字人建模与动画工作流',
+    topic: '生成式建模 / 角色动画',
+    status: '初步测试 · 2026.09',
+    summary: '以同一份古风数字人三视图为输入，比较「GPT 调用 Blender MCP 直接建模」与「叠加 Hyper3D 生成基模再拆件绑定」两条路径，并测试四肢绑定、面部动画与新头部接入的可选方案。',
   },
 ]
 

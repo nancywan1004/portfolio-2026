@@ -6,20 +6,25 @@ const props = defineProps<{
   description: string
   cover: string
   coverAlt: string
+  base?: string
+  group?: string
 }>()
+
+const routeBase = props.base ?? '#work/universe'
+const groupName = props.group ?? 'universe-technical-chapters'
 
 function rememberChapter(event: Event) {
   const chapter = event.currentTarget as HTMLDetailsElement
-  const hash = `#work/universe/${props.id}`
+  const hash = `${routeBase}/${props.id}`
   const isCurrentChapter = location.hash === hash || location.hash.startsWith(hash + '/')
   if (chapter.open) {
     if (!isCurrentChapter) history.replaceState(history.state, '', hash)
     requestAnimationFrame(() => {
-      const target = location.hash === '#work/universe/shader/ownership' ? document.getElementById('shader-ownership') : chapter
+      const target = routeBase === '#work/universe' && location.hash === '#work/universe/shader/ownership' ? document.getElementById('shader-ownership') : chapter
       target?.scrollIntoView({ block: 'start', behavior: 'instant' })
     })
   } else if (isCurrentChapter) {
-    history.replaceState(history.state, '', '#work/universe')
+    history.replaceState(history.state, '', routeBase)
     requestAnimationFrame(() => {
       if (!chapter.parentElement?.querySelector('.case-chapter[open]')) {
         chapter.parentElement?.scrollIntoView({ block: 'start', behavior: 'instant' })
@@ -30,7 +35,7 @@ function rememberChapter(event: Event) {
 </script>
 
 <template>
-  <details :id="id" class="case-chapter" name="universe-technical-chapters" tabindex="-1" @toggle="rememberChapter">
+  <details :id="id" class="case-chapter" :name="groupName" tabindex="-1" @toggle="rememberChapter">
     <summary class="chapter-summary">
       <span class="chapter-number">{{ number }}</span>
       <div class="chapter-overview"><h3>{{ title }}</h3><p>{{ description }}</p><span class="chapter-action"><span class="when-closed">展开案例</span><span class="when-open">收起案例</span></span></div>
