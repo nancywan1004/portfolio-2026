@@ -126,7 +126,8 @@ function observeSections() {
   }, { rootMargin: '0px 0px -8% 0px', threshold: .04 })
   root.querySelectorAll<HTMLElement>('.reveal').forEach(target => revealObserver?.observe(target))
 }
-const calloutAngles = [160, 250, 340, 70].map(degrees => degrees * Math.PI / 180)
+const calloutDegrees = [160, 250, 340, 70]
+const calloutAngles = calloutDegrees.map(degrees => degrees * Math.PI / 180)
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 const wideQuery = window.matchMedia('(min-width: 761px)')
 let navFrame = 0, navPrevious = 0, navTime = 0, navSmooth = 0
@@ -155,6 +156,20 @@ function navLoop(now: number) {
   })
   navFrame = requestAnimationFrame(navLoop)
 }
+function primeOrbitIntro() {
+  const nav = orbitNav.value
+  if (!nav || motionQuery.matches) return
+  const items = Array.from(nav.querySelectorAll<HTMLElement>('.orbit-callout'))
+  if (!items.length) return
+  const radius = nav.clientWidth * .44
+  items.forEach((element, index) => {
+    const angle = calloutAngles[index] ?? 0
+    element.style.setProperty('--in-from-x', `${(-Math.cos(angle) * radius).toFixed(1)}px`)
+    element.style.setProperty('--in-from-y', `${(-Math.sin(angle) * radius).toFixed(1)}px`)
+  })
+  nav.classList.add('is-intro')
+  requestAnimationFrame(() => requestAnimationFrame(() => nav.classList.remove('is-intro')))
+}
 function startNav() { if (!navFrame) { navPrevious = 0; navFrame = requestAnimationFrame(navLoop) } }
 function stopNav() { if (navFrame) cancelAnimationFrame(navFrame); navFrame = 0; navPrevious = 0; clearCalloutShift() }
 function jumpToSection(id: string) {
@@ -162,8 +177,8 @@ function jumpToSection(id: string) {
   if (index >= 0) activeSection.value = index
   document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
 }
-onMounted(() => { observeSections(); addEventListener('scroll', scheduleTrack, { passive: true }); addEventListener('resize', scheduleTrack); startNav() })
-watch(page, async () => { await nextTick(); observeSections() })
+onMounted(() => { observeSections(); addEventListener('scroll', scheduleTrack, { passive: true }); addEventListener('resize', scheduleTrack); startNav(); primeOrbitIntro() })
+watch(page, async () => { await nextTick(); observeSections(); if (page.value === 'home') primeOrbitIntro() })
 watch(page, value => { if (value === 'home') startNav(); else stopNav() })
 function keyboard(event: KeyboardEvent) {
   if (event.key === 'Escape') void go(page.value === 'chat' ? previousPage.value : 'home')
@@ -202,7 +217,7 @@ async function send(value = question.value) {
     </header>
 
     <main v-if="page === 'home'" class="home-page page-appear">
-      <div class="home-intro"><p class="home-signature"><span class="home-name">万乐琪<span class="home-name-en">Nancy Wan</span></span></p><h1 ref="title" tabindex="-1">实时三维<em>与交互开发</em></h1><p class="serif intro-description">专注 Web3D、3DGS 场景渲染，<br class="desktop-break">以及实时图形与交互系统开发。</p></div>
+      <div class="home-intro"><p class="home-signature"><span class="home-name"><span class="intro-line" style="--intro-delay:.95s">万乐琪</span><span class="home-name-en"><span class="intro-line" style="--intro-delay:1.06s">Nancy Wan</span></span></span></p><h1 ref="title" tabindex="-1"><span class="intro-line" style="--intro-delay:1.16s">实时三维</span><em><span class="intro-line" style="--intro-delay:1.34s">与交互开发</span></em></h1><p class="serif intro-description"><span class="intro-line" style="--intro-delay:1.48s">专注 Web3D、3DGS 场景渲染，</span><br class="desktop-break"><span class="intro-line" style="--intro-delay:1.6s">以及实时图形与交互系统开发。</span></p></div>
       <div class="home-art"><ArtScene ref="art" :highlight="highlighted" :paused="paused" :openable="assistantEnabled" @open="go('chat')" /></div>
       <div ref="orbitNav" class="orbit-navigation" aria-label="浏览作品集">
         <button v-for="(item, index) in nav" :key="item.page" class="orbit-callout" :class="['callout-' + item.page, { 'is-highlighted': highlighted === index }]" @pointerenter="highlighted = index; navHover = true" @pointerleave="highlighted = -1; navHover = false" @focus="highlighted = index" @blur="highlighted = -1" @click="go(item.page)">

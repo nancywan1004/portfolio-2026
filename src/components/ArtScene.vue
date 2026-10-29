@@ -25,7 +25,12 @@ let width = 1, height = 1
 const geometry: THREE.BufferGeometry[] = []
 const materials: THREE.Material[] = []
 const rings: Line2[] = []
+const ringGroups: THREE.Group[] = []
+const ringZ: number[] = []
 const satellites: { mesh: THREE.Mesh; phase: number; speed: number }[] = []
+const entrance = { p: 0 }
+let coreFace: THREE.Mesh | undefined
+let coreRim: THREE.Line | undefined
 const tilt = { x: 0, y: 0 }
 const drag = { x: 0, y: 0, lastX: 0, lastY: 0, distance: 0, id: -1 }
 const hover = { x: 0, y: 0 }
@@ -97,9 +102,24 @@ function render(now: number) {
     orbit.scale.setScalar(shape.scale)
     const easing = reduced.matches ? 0 : (dragging.value ? .012 : .02)
     core.position.set(-tilt.y * easing, tilt.x * easing, 0)
+    const intro = entrance.p
+    const grew: number[] = []
+    ringGroups.forEach((group, index) => {
+      const local = Math.min(1, Math.max(0, (intro - index * .045) / .72))
+      const eased = local * local * (3 - 2 * local)
+      grew.push(eased)
+      group.scale.setScalar(.012 + .988 * eased)
+      group.rotation.z = (ringZ[index] ?? 0) + (1 - eased) * 1.3
+    })
+    const coreLocal = Math.min(1, Math.max(0, intro / .5))
+    const coreGrew = coreLocal * coreLocal * (3 - 2 * coreLocal)
+    core.scale.setScalar(.3 + .7 * coreGrew)
+    if (coreFace) (coreFace.material as THREE.MeshBasicMaterial).opacity = coreGrew
+    if (coreRim) (coreRim.material as THREE.LineBasicMaterial).opacity = coreGrew
     rings.forEach((ring, index) => {
       const base = index < 4 ? .78 : index < 6 ? .44 : .22
-      ;(ring.material as LineMaterial).opacity = props.highlight < 0 ? base : index % 4 === props.highlight ? .95 : base * .55
+      const target = props.highlight < 0 ? base : index % 4 === props.highlight ? .95 : base * .55
+      ;(ring.material as LineMaterial).opacity = target * (grew[index] ?? 1)
     })
     satellites.forEach(({ mesh, phase, speed }) => {
       const t = phase + time * speed
@@ -122,7 +142,7 @@ onMounted(() => {
       const lineGeometry = new LineGeometry(); lineGeometry.setPositions(vertices)
       const material = new LineMaterial({ color: 0x33332f, linewidth: index < 4 ? .85 : .65, transparent: true, depthWrite: false, depthTest: false })
       const line = new Line2(lineGeometry, material); group.add(line); orbit.add(group)
-      geometry.push(lineGeometry); materials.push(material); rings.push(line)
+      geometry.push(lineGeometry); materials.push(material); rings.push(line); ringGroups.push(group); ringZ.push(pose[2]!)
       if (index < 3) {
         const dotGeometry = new THREE.SphereGeometry(.025, 12, 8)
         const dotMaterial = new THREE.MeshBasicMaterial({ color: 0x242422 })
@@ -132,20 +152,23 @@ onMounted(() => {
     })
     const coreGeometry = new THREE.CircleGeometry(.37, 64)
     const coreMaterial = new THREE.MeshBasicMaterial({ color: 0xf9f8f6, depthTest: false, transparent: true, opacity: 1 })
-    const coreFace = new THREE.Mesh(coreGeometry, coreMaterial); coreFace.renderOrder = 10
+    const face = new THREE.Mesh(coreGeometry, coreMaterial); face.renderOrder = 10
     geometry.push(coreGeometry); materials.push(coreMaterial)
     const rimGeometry = new THREE.BufferGeometry().setFromPoints(Array.from({ length: 97 }, (_, i) => new THREE.Vector3(Math.cos(i / 96 * Math.PI * 2) * .375, Math.sin(i / 96 * Math.PI * 2) * .375, .01)))
     const rimMaterial = new THREE.LineBasicMaterial({ color: 0x292927, depthTest: false, transparent: true, opacity: 1 })
     const rim = new THREE.Line(rimGeometry, rimMaterial); rim.renderOrder = 11
     geometry.push(rimGeometry); materials.push(rimMaterial)
-    core.add(coreFace, rim); scene.add(core)
+    coreFace = face; coreRim = rim
+    core.add(face, rim); scene.add(core)
     observer = new ResizeObserver(size); observer.observe(host.value!); size()
     frame = requestAnimationFrame(render)
+    if (reduced.matches) entrance.p = 1
+    else gsap.fromTo(entrance, { p: 0 }, { p: 1, duration: 1.25, ease: 'power1.out', delay: .04 })
   } catch { failed.value = true }
 })
 onBeforeUnmount(() => {
   disposed = true; cancelAnimationFrame(frame); observer?.disconnect()
-  gsap.killTweensOf(shape); gsap.killTweensOf(drag)
+  gsap.killTweensOf(shape); gsap.killTweensOf(drag); gsap.killTweensOf(entrance)
   geometry.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); renderer?.dispose()
 })
 </script>
