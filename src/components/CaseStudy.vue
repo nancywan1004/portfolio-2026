@@ -88,15 +88,6 @@
 :deep(code){font-family:monospace;font-size:10px;background:#ecece4;padding:2px 4px;color:#59604c}
 :deep(.mechanism figure){margin:6px 0 20px}
 :deep(.mechanism img){display:block;width:515px;max-width:100%;height:auto;margin:0 auto}
-:deep(.result-round){border-top-color:var(--ink)}
-:deep(.result-list){margin:22px 0 0;font-size:13px}
-:deep(.result-list>div){display:grid;grid-template-columns:125px minmax(0,1fr);gap:24px;padding:22px 0;border-top:1px solid var(--line)}
-:deep(.result-list dt){padding-top:4px;font-size:11px;color:var(--muted)}
-:deep(.result-list dd){margin:0;white-space:normal}
-:deep(.result-list strong){font-size:clamp(21px,2.2vw,28px);font-weight:400;letter-spacing:-.025em;line-height:1.5}
-:deep(.result-list strong small){font-size:14px}
-:deep(.result-list p){max-width:710px;margin:8px 0 0;font-size:12px;line-height:1.9;color:#62665b}
-:deep(.result-note){font-size:10px;line-height:1.9;color:var(--muted);margin:20px 0 0;max-width:900px}
 @media(max-width:850px){
 :deep(.round){grid-template-columns:100px minmax(0,1fr);gap:20px}
 :deep(.round-label){display:block}
@@ -144,11 +135,6 @@
 :deep(.finding h5),:deep(.decision-block h5){font-size:18px}
 :deep(.defaults){gap:16px}
 :deep(.defaults b){font-size:38px}
-:deep(.result-list>div){grid-template-columns:1fr;gap:8px;padding:19px 0}
-:deep(.result-list dt){padding-top:0}
-:deep(.result-list strong){font-size:23px}
-:deep(.result-list p){font-size:12px}
-:deep(.result-note){font-size:9px}
 :deep(th),:deep(td){padding-right:16px}
 :deep(summary){font-size:11px}}
 

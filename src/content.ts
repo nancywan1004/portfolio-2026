@@ -1,4 +1,5 @@
-export const featureFlags = { assistant: false }
+// personalProjects 关闭时，项目页只显示工作项目，个人项目数据保留但不渲染。
+export const featureFlags = { assistant: false, personalProjects: false }
 export const profile = {
   name: '万乐琪',
   role: 'XR / 三维图形开发工程师',
@@ -32,45 +33,45 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: '01', kind: 'work', title: 'Universe', category: '三维重建与创作平台', year: '2026',
+    id: '01', kind: 'work', title: 'Universe开放平台', category: '三维重建与创作平台', year: '2026',
     tags: 'PlayCanvas · 3DGS · GLSL / WGSL',
     description: '面向 3DGS 场景重建、编辑与交互的 SaaS 平台。负责三维前端开发，工作包括重光照、大场景 LOD 流式调度与 Shader 特效系统。',
     detail: '三维前端开发 / 重光照 · 大场景 LOD · Shader 特效',
     status: 'published'
   },
   {
-    id: '02', kind: 'work', title: 'AI + AR 随身导览', category: '大模型问答与空间定位', year: '2024 — 至今',
-    tags: '小程序 · 大模型 · VPS AR · 流式问答',
-    description: '面向文旅场景的 AI + AR 导览小程序，集成大模型问答与 VPS AR 定位，支撑现场示范应用落地。',
-    detail: '案例整理中：将补充技术选型、流式问答链路、YUV 转换与端上性能处理。',
-    status: 'draft'
+    id: '02', kind: 'work', title: 'AI + AR 随身导览', category: 'AR 导览与景区小程序', year: '2024 — 至今',
+    tags: '小程序 · XR-Frame · 自研 VPS · Unicity',
+    description: '村史馆验证室内空间导览原型；VPS 定位与纯 AR 打卡体验上线于水峪嘴村小程序。',
+    detail: 'WASM 图像转换 / 坐标对齐 / Unicity 建图与摆点 / AR 渲染与内存',
+    status: 'published'
   },
   {
     id: '03', kind: 'work', title: 'YumeGO AR', category: '移动端 AR 游戏', year: '2022 — 2024',
     tags: 'iOS / Android · Unity · AR Foundation · Lua',
     description: '与时尚品牌合作的多人多地 AR 寻宝游戏，融合协作解谜玩法与 AI 对话体验，已在全球上线。',
-    detail: '案例整理中：将补充多人同步、玩法编排与上线迭代过程。',
+    detail: '待补充：多人同步、玩法编排、上线迭代。',
     status: 'draft'
   },
   {
     id: '04', kind: 'work', title: 'Yumebau VR', category: 'Meta Quest 自研游戏', year: '2022 — 2024',
-    tags: 'Unity · Meta Quest · VR UI · 中台工具',
+    tags: 'Unity · Meta Quest · VR · 中台工具',
     description: '自研 VR 游戏 IP 的内容配置系统、腕带 UI 菜单与中台软件包研发。',
-    detail: '案例整理中：将补充内容管线、运行时热补丁与编辑器扩展。',
+    detail: '待补充：内容管线、热补丁、编辑器扩展。',
     status: 'draft'
   },
   {
     id: '05', kind: 'personal', title: 'WebGPU Shader 实验', category: '实时图形', year: '进行中',
     tags: 'WebGPU · WGSL · 计算着色器',
     description: '以 WGSL 编写的着色实验，用于验证 WebGPU 渲染管线与计算着色器的表达能力。',
-    detail: '实验整理中：将补充管线搭建、与 WebGL 实现的对照及可视化记录。',
+    detail: '待补充：管线搭建、WebGL 对照、可视化记录。',
     status: 'draft'
   },
   {
     id: '06', kind: 'personal', title: '视角覆盖分析器', category: '图形工具', year: '进行中',
     tags: 'TypeScript · 几何计算 · 可视化',
     description: '分析三维场景的相机视角覆盖情况，解决视角不全与二维投影到三维的多视角一致性问题。',
-    detail: '工具整理中：将补充覆盖判定方法、投影一致性校验与结果可视化。',
+    detail: '待补充：覆盖判定、投影一致性、结果可视化。',
     status: 'draft'
   },
 ]
@@ -91,7 +92,7 @@ export const explorations: Exploration[] = [
     title: 'AI 辅助数字人建模与动画工作流',
     topic: '生成式建模 / 角色动画',
     status: '初步测试 · 2026.09',
-    summary: '以同一份古风数字人三视图为输入，比较「GPT 调用 Blender MCP 直接建模」与「叠加 Hyper3D 生成基模再拆件绑定」两条路径，并测试四肢绑定、面部动画与新头部接入的可选方案。',
+    summary: '同一份三视图下，比较基模生成、骨骼绑定与面部动画的可行方案。',
   },
 ]
 
@@ -100,18 +101,16 @@ export const experience = [
     period: '05/24 — 至今',
     title: '高级三维工程师',
     place: '北京数原数字化城市研究中心',
-    description: '城市场景多元三维技术栈探索与项目落地，涉及 3D Gaussian Splatting（3DGS）渲染与创作、AI + AR 小程序等方向。',
     points: [
       'Web 端 3DGS 渲染 + 创作平台：搭建基于 PlayCanvas 的 3DGS 渲染与编辑创作链路；负责自研高斯重光照（点光源 / 聚光灯 / 手电筒）系统与特效系统，并搭建多种光影特效混合渲染管线；集成代理网格以实现高斯的物理碰撞与阴影管线。',
       '大场景 LOD 渲染优化：面向千万至亿级高斯场景（三里屯 SOHO 演示场景 9,434 万高斯点），优化八叉树 LOD 调度、中心优先预取与增量更新，减少重复同步和缓冲区重建；在 WebGPU 管线的部分场景实测中，播放段帧率中位数由 20 提升至 35 FPS。',
-      'AI + AR：主导 AI + AR 随身导览小程序的研发，集成大模型 AI 问答与 VPS AR 定位功能；实现流式问答响应机制，接入阿里云 ASR/TTS；优化 YUV→RGB 毫秒级转换、资产预加载、内存与环境贴图渲染，支撑水峪嘴村示范应用成功落地。',
+      'AI + AR：先在村史馆完成 XR-Frame 室内实时定位 + 团队自研 VPS + Agent 问答的空间导览原型；对外上线的 VPS 定位与纯 AR 体验用于水峪嘴村小程序，建图与 AR 资产摆放在团队自研采集应用 Unicity 完成，小程序复用同一张地图跨坐标系运行；实现打卡点与虚拟驼队、马致远合影及水印海报，并优化 YUV→RGB 毫秒级转换、资产预加载、内存与环境贴图渲染，支撑示范应用落地。',
     ],
   },
   {
     period: '09/22 — 04/24',
-    title: 'XR 内容与系统工程师',
+    title: 'Unity XR 内容与系统工程师',
     place: 'Yumebau Inc.',
-    description: '参与两个从 0-1 落地的完整项目：iOS/Android AR 应用与 Meta Quest VR 自研游戏。',
     points: [
       '主持与 ACRNYM（一机能时尚品牌）合作的 YumeGO AR“寻宝游戏”开发，融合多人多地协作 DDoS 解谜玩法与 AI 图灵测试对话体验，成功在全球上线。',
       '设计并实现自研 VR 游戏 IP 的内容配置系统与编辑器扩展工具，支持资产保存、编辑及运行时服务器端热补丁，保障内容一致性与完整性。',

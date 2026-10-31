@@ -4,9 +4,6 @@ import LodCaseStudy from './LodCaseStudy.vue'
 import RelightingCaseStudy from './RelightingCaseStudy.vue'
 import ShaderCaseStudy from './ShaderCaseStudy.vue'
 import CaseChapter from './CaseChapter.vue'
-function openShaderOwnership() {
-  location.hash = '#work/universe/shader/ownership'
-}
 const demos = [
   { n: '01', type: '平台概览', title: '平台介绍与功能概览', description: '了解 Universe 的产品目标与创作流程。', url: 'https://weixin.qq.com/sph/AEYrd9MRaQ' },
   { n: '02', type: '综合创作', title: '重光照 × 特效 × 资产放置', description: '在重建场景中组合光照、视觉效果与三维资产。', cover: '/media/universe/demo-02.webp', url: 'https://www.xiaohongshu.com/discovery/item/6a4cc945000000001c027a21?source=webshare&xhsshare=pc_web&xsec_token=ABm2xeTCWD8tFWd9IQrEYs1ZBDGZ17_4FTToSv6KyAB4I=&xsec_source=pc_share' },
@@ -28,7 +25,7 @@ const demos = [
     <section class="chapter-group" aria-label="项目技术专题">
       <p class="eyebrow chapter-group-label">核心工作</p>
       <CaseChapter id="relighting" number="01" title="3DGS 场景重光照" description="扩展高斯材质着色路径，支持全局亮度、局部灯光、亮灯笔刷与交互手电筒。" cover="/media/universe/demo-04.webp" cover-alt="交互手电筒演示封面">
-        <RelightingCaseStudy @open-shader="openShaderOwnership" />
+        <RelightingCaseStudy />
       </CaseChapter>
       <CaseChapter id="lod" number="02" title="大场景 LOD 调度优化" description="从视野优先加载到运行时修复，结合多场景评测，验证叶块粒度与预算分配的取舍。演示场景三里屯 SOHO 为 9,434 万高斯点。" cover="/media/universe/sanlitun-poster.jpg" cover-alt="三里屯 SOHO 三维场景">
         <LodCaseStudy />

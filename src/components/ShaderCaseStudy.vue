@@ -54,18 +54,6 @@ import CaseStudy from './CaseStudy.vue'
       </div>
     </article>
 
-    <section class="round result-round" aria-labelledby="shader-result-title">
-      <div class="round-label"><span>04</span><p>结果汇总</p></div>
-      <div class="round-body">
-        <h4 id="shader-result-title">着色仲裁、画风算法与开场交接的交付结果</h4>
-        <dl class="result-list">
-          <div><dt>可控组合</dt><dd><strong>统一所有权与交接</strong><p>分层注入与贡献者仲裁明确覆盖关系；开场接管、内容放行和夜景恢复使用统一生命周期规则。</p></dd></div>
-          <div><dt>画风实现</dt><dd><strong>方向场与跨层投影</strong><p>用图像结构生成钢笔排线，以点径换算和天空补偿处理点彩一致性，明确图像退化与排序边界。</p></dd></div>
-          <div><dt>开场交接</dt><dd><strong>尺度适配与延后恢复</strong><p>按场景范围反算播放时长，完成后放行内容；在 frameend 清理并交还着色控制，处理同帧卸载覆盖夜景恢复的问题。</p></dd></div>
-        </dl>
-        <p class="result-note">以上对应系统与算法交付；效果组合、跨尺度播放和双后端表现仍需按具体路径验证。</p>
-      </div>
-    </section>
   </CaseStudy>
 </template>
 

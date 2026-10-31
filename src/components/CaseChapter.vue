@@ -38,7 +38,7 @@ function rememberChapter(event: Event) {
   <details :id="id" class="case-chapter" :name="groupName" tabindex="-1" @toggle="rememberChapter">
     <summary class="chapter-summary">
       <span class="chapter-number">{{ number }}</span>
-      <div class="chapter-overview"><h3>{{ title }}</h3><p>{{ description }}</p><span class="chapter-action"><span class="when-closed">展开案例</span><span class="when-open">收起案例</span></span></div>
+      <div class="chapter-overview"><h3>{{ title }}</h3><p>{{ description }}</p><span class="chapter-action"><span class="when-closed">展开</span><span class="when-open">收起</span></span></div>
       <img class="chapter-cover" :src="cover" :alt="coverAlt" loading="lazy" />
       <span class="chapter-toggle" aria-hidden="true"></span>
     </summary>

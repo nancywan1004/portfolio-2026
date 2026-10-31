@@ -4,6 +4,7 @@ import ArtScene from './components/ArtScene.vue'
 import StarMark from './components/StarMark.vue'
 import ProjectArtwork from './components/ProjectArtwork.vue'
 import UniverseCase from './components/UniverseCase.vue'
+import AiArCase from './components/AiArCase.vue'
 import ExplorationCase from './components/ExplorationCase.vue'
 import ScrollField from './components/ScrollField.vue'
 import SideOrbit from './components/SideOrbit.vue'
@@ -41,30 +42,32 @@ function toggleExploration(id: string) {
 const activeSection = ref(0)
 const assistantEnabled = featureFlags.assistant
 const question = ref('')
-const nav: { page: Page; label: string; subtitle: string }[] = [
-  { page: 'work', label: '项目', subtitle: '工作项目与个人实践' },
-  { page: 'background', label: '背景', subtitle: '经历、教育与技术栈' },
-  { page: 'labs', label: '探索', subtitle: '新技术调研与测试记录' },
-  { page: 'contact', label: '联系', subtitle: '联系方式与合作方向' },
+const nav: { page: Page; label: string }[] = [
+  { page: 'work', label: '项目' },
+  { page: 'background', label: '背景' },
+  { page: 'labs', label: '探索' },
+  { page: 'contact', label: '联系' },
 ]
-const workProjects = computed(() => projects.map((project, index) => ({ project, index })).filter(entry => entry.project.kind === 'work'))
-const personalProjects = computed(() => projects.map((project, index) => ({ project, index })).filter(entry => entry.project.kind === 'personal'))
+const visibleProjects = computed(() => featureFlags.personalProjects ? projects : projects.filter(project => project.kind === 'work'))
+const indexedProjects = computed(() => visibleProjects.value.map((project, index) => ({ project, index })))
+const workProjects = computed(() => indexedProjects.value.filter(entry => entry.project.kind === 'work'))
+const personalProjects = computed(() => indexedProjects.value.filter(entry => entry.project.kind === 'personal'))
 const projectGroups = computed(() => [
-  { key: 'work', label: '工作项目', note: '产品研发中的完整链路、技术方案与取舍。', entries: workProjects.value },
-  { key: 'personal', label: '个人项目', note: '自主发起的图形实验与工具实践。', entries: personalProjects.value },
+  { key: 'work', label: '工作项目', note: '', entries: workProjects.value },
+  ...(personalProjects.value.length ? [{ key: 'personal', label: '个人项目', note: '', entries: personalProjects.value }] : []),
 ])
 function statusLabel(project: Project, open: boolean) {
-  if (project.id === '01') return open ? '完整案例 / 阅读中' : '查看完整案例 ↓'
+  if (['01', '02'].includes(project.id)) return open ? '完整案例 / 阅读中' : '查看完整案例 ↓'
   if (project.status === 'draft') return open ? '整理中 / 阅读中' : '案例整理中 ↓'
   return open ? '项目笔记 / 阅读中' : '项目笔记 ↓'
 }
 type Section = { id: string; label: string }
 const sections = computed<Section[]>(() => {
-  if (page.value === 'work') return projects.map(project => ({ id: `work-${project.id}`, label: project.title }))
+  if (page.value === 'work') return visibleProjects.value.map(project => ({ id: `work-${project.id}`, label: project.title }))
   if (page.value === 'background') return [
     ...experience.map((item, index) => ({ id: `experience-${index}`, label: item.title })),
-    { id: 'background-education', label: '教育背景' },
-    { id: 'background-skills', label: '技术背景' },
+    { id: 'background-education', label: '教育' },
+    { id: 'background-skills', label: '技术' },
   ]
   if (page.value === 'labs') return explorations.map((item, index) => ({ id: `labs-${index}`, label: item.title }))
   if (page.value === 'contact') return [{ id: 'contact-email', label: '邮箱' }, { id: 'contact-phone', label: '电话' }, { id: 'contact-github', label: 'GitHub' }, { id: 'contact-site', label: '个人网站' }]
@@ -73,8 +76,8 @@ const sections = computed<Section[]>(() => {
 const fieldKind = computed<'work' | 'background' | 'labs' | 'contact'>(() => page.value === 'work' || page.value === 'background' || page.value === 'labs' ? page.value : 'contact')
 const copy = computed(() => ({
   background: { eyebrow: '02 / 背景', lines: ['个人经历'], description: '四年+三维与 XR 项目研发，近期聚焦 3DGS 渲染扩展与大场景优化。' },
-  labs: { eyebrow: '03 / 技术探索', lines: ['新技术调研', '与测试记录'], description: '把正在调研与验证的技术方向整理成可复查的记录，保留测试条件与结论边界。' },
-  contact: { eyebrow: '04 / 联系', lines: ['联系方式', '与合作方向'], description: '围绕实时三维、交互体验与创意开发，展开一次交流。' },
+  labs: { eyebrow: '03 / 技术探索', lines: ['新技术探索'], description: '技术笔记与探索记录。' },
+  contact: { eyebrow: '04 / 联系', lines: ['联系方式'], description: '围绕实时三维、交互体验与创意开发，展开一次交流。' },
 }[page.value as 'background' | 'labs' | 'contact']))
 const messages = ref<{ id: number; role: 'assistant' | 'user'; text: string; link?: boolean }[]>([
   { id: 0, role: 'assistant', text: '你好，我是万乐琪作品集的导览助手。可以聊聊 Universe 的重光照、大场景 LOD、Shader 特效，或这份作品集的交互设计。' },
@@ -96,6 +99,19 @@ async function openUniverse() {
   document.getElementById('universe-heading')?.focus({ preventScroll: true })
 }
 async function openLinkedCase() {
+  const aiarMatch = location.hash.match(/^#work\/ai-ar(?:\/(capture|alignment|resources|interaction|unicity|experience))?$/)
+  if (aiarMatch) {
+    selectedProject.value = '02'
+    await nextTick()
+    const chapterId = ({ unicity: 'alignment', interaction: 'aiar-heading', experience: 'aiar-heading' } as Record<string, string>)[aiarMatch[1] || ''] || aiarMatch[1] || 'aiar-heading'
+    if (chapterId !== aiarMatch[1] && aiarMatch[1]) history.replaceState(history.state, '', chapterId === 'aiar-heading' ? '#work/ai-ar' : '#work/ai-ar/' + chapterId)
+    const target = document.getElementById(chapterId)
+    if (target instanceof HTMLDetailsElement) target.open = true
+    await nextTick()
+    target?.scrollIntoView({ behavior: 'instant' })
+    target?.focus({ preventScroll: true })
+    return
+  }
   const match = location.hash.match(/^#work\/universe(?:\/(relighting|lod|shader)(\/ownership)?)?$/)
   if (!match) return
   if (match[2] && match[1] !== 'shader') return
@@ -254,14 +270,14 @@ async function send(value = question.value) {
     </header>
 
     <main v-if="page === 'home'" class="home-page page-appear">
-      <div class="home-intro"><p class="home-signature"><span class="home-name"><span class="intro-line" style="--intro-delay:.95s">万乐琪</span><span class="home-name-en"><span class="intro-line" style="--intro-delay:1.06s">Nancy Wan</span></span></span></p><h1 ref="title" tabindex="-1"><span class="intro-line" style="--intro-delay:1.16s">实时三维</span><em><span class="intro-line" style="--intro-delay:1.34s">与交互开发</span></em></h1><p class="serif intro-description"><span class="intro-line" style="--intro-delay:1.48s">专注 Web3D、3DGS 场景渲染，</span><br class="desktop-break"><span class="intro-line" style="--intro-delay:1.6s">以及实时图形与交互系统开发。</span></p></div>
+      <div class="home-intro"><p class="home-signature"><span class="home-name"><span class="intro-line" style="--intro-delay:.95s">万乐琪</span><span class="home-name-en"><span class="intro-line" style="--intro-delay:1.06s">Nancy Wan</span></span></span></p><h1 ref="title" tabindex="-1"><span class="intro-line" style="--intro-delay:1.16s">实时三维</span><em><span class="intro-line" style="--intro-delay:1.34s">与交互开发</span></em></h1><p class="serif intro-description"><span class="intro-line" style="--intro-delay:1.48s">Web3D · 3DGS · 实时图形</span></p></div>
       <div class="home-art"><ArtScene ref="art" :highlight="highlighted" :paused="paused" :openable="assistantEnabled" @open="go('chat')" /></div>
       <div ref="orbitNav" class="orbit-navigation" aria-label="浏览作品集">
         <button v-for="(item, index) in nav" :key="item.page" class="orbit-callout" :class="['callout-' + item.page, { 'is-highlighted': highlighted === index }]" @pointerenter="highlighted = index; navHover = true" @pointerleave="highlighted = -1; navHover = false" @focus="highlighted = index" @blur="highlighted = -1" @click="go(item.page)">
-          <StarMark/><span class="callout-number">0{{ index + 1 }}</span><span class="callout-copy"><span class="callout-title">{{ item.label }}<span class="callout-arrow">↗</span></span><span class="callout-subtitle">{{ item.subtitle }}</span></span>
+          <StarMark/><span class="callout-number">0{{ index + 1 }}</span><span class="callout-copy"><span class="callout-title">{{ item.label }}<span class="callout-arrow">↗</span></span></span>
         </button>
       </div>
-      <div class="home-bottom"><p class="eyebrow">选择栏目，查看项目与背景</p><div class="rotation-controls"><span>{{ assistantEnabled ? '拖动旋转 · 点击对话' : '拖动旋转 · 方向键微调' }}</span><button :aria-label="paused ? '继续自动旋转' : '暂停自动旋转'" :aria-pressed="paused" @click="paused = !paused">{{ paused ? '继续' : '暂停' }}</button><button aria-label="重置旋转" @click="art?.reset()">重置 ↺</button></div></div>
+      <div class="home-bottom"><p class="eyebrow"></p><div class="rotation-controls"><span>{{ assistantEnabled ? '拖动旋转 · 点击对话' : '拖动旋转 · 方向键微调' }}</span><button :aria-label="paused ? '继续自动旋转' : '暂停自动旋转'" :aria-pressed="paused" @click="paused = !paused">{{ paused ? '继续' : '暂停' }}</button><button aria-label="重置旋转" @click="art?.reset()">重置 ↺</button></div></div>
     </main>
 
     <main v-else-if="page === 'chat'" class="assistant-page page-appear">
@@ -276,12 +292,11 @@ async function send(value = question.value) {
 
     <main v-else :key="page" class="editorial-page page-appear" :class="'page-' + page">
       <template v-if="page === 'work'">
-        <section class="work-intro"><p class="eyebrow">01 / 项目与实践</p><div class="work-heading"><h1 ref="title" tabindex="-1">三维前端<em>项目与技术实践</em></h1><p class="serif">项目背景、个人职责、技术方案与阶段验证结果。</p></div></section>
-        <p class="content-notice">项目索引 / 工作与个人项目分组排列，整理中的条目会标注状态。</p>
+        <section class="work-intro"><p class="eyebrow">01 / 项目</p><div class="work-heading"><h1 ref="title" tabindex="-1">项目<em>与技术实践</em></h1><p class="serif">职责、方案与验证结果。</p></div></section>
         <section v-for="(group, groupIndex) in projectGroups" :key="group.key" class="work-group" :aria-label="group.label">
-          <header class="work-group-heading"><p class="eyebrow">0{{ groupIndex + 1 }} / {{ group.label }}</p><p class="serif">{{ group.note }}</p></header>
+          <header v-if="projectGroups.length > 1" class="work-group-heading"><p class="eyebrow">0{{ groupIndex + 1 }} / {{ group.label }}</p><p class="serif">{{ group.note }}</p></header>
           <div class="work-list">
-            <article v-for="entry in group.entries" :key="entry.project.id" :id="'work-' + entry.project.id" class="work-row reveal" data-section :data-index="entry.index"><div class="work-meta"><span>{{ entry.project.id }}</span><span>{{ entry.project.category }}</span><span class="work-year">{{ entry.project.year }}</span></div><button class="work-image" v-tilt="4" :aria-label="'查看 ' + entry.project.title" :aria-expanded="selectedProject === entry.project.id" :aria-controls="'case-' + entry.project.id" @click="selectedProject = selectedProject === entry.project.id ? null : entry.project.id"><img v-if="entry.project.id === '01'" class="universe-cover" src="/media/universe/platform-home.png" alt="Universe 开放平台首页" loading="lazy"><ProjectArtwork v-else :variant="entry.index + 1"/></button><div class="work-copy"><h2 class="serif"><button :aria-expanded="selectedProject === entry.project.id" @click="selectedProject = selectedProject === entry.project.id ? null : entry.project.id">{{ entry.project.title }}</button></h2><p>{{ entry.project.tags }}</p><span class="case-status" :class="{ 'is-draft': entry.project.status === 'draft' }">{{ statusLabel(entry.project, selectedProject === entry.project.id) }}</span></div><button class="work-arrow" :aria-label="(selectedProject === entry.project.id ? '收起 ' : '展开 ') + entry.project.title" :aria-expanded="selectedProject === entry.project.id" @click="selectedProject = selectedProject === entry.project.id ? null : entry.project.id">{{ selectedProject === entry.project.id ? '−' : '↗' }}</button><div v-if="selectedProject === entry.project.id" :id="'case-' + entry.project.id" :class="entry.project.id === '01' ? 'full-case-detail' : 'case-detail'"><UniverseCase v-if="entry.project.id === '01'"/><template v-else><p class="eyebrow">项目笔记 / {{ entry.project.id }}</p><div><p class="serif">{{ entry.project.description }}</p><p>{{ entry.project.detail }}</p></div></template></div></article>
+            <article v-for="entry in group.entries" :key="entry.project.id" :id="'work-' + entry.project.id" class="work-row reveal" data-section :data-index="entry.index"><div class="work-meta"><span>{{ entry.project.id }}</span><span>{{ entry.project.category }}</span><span class="work-year">{{ entry.project.year }}</span></div><button class="work-image" v-tilt="4" :aria-label="'查看 ' + entry.project.title" :aria-expanded="selectedProject === entry.project.id" :aria-controls="'case-' + entry.project.id" @click="selectedProject = selectedProject === entry.project.id ? null : entry.project.id"><img v-if="entry.project.id === '01'" class="universe-cover" src="/media/universe/platform-home.png" alt="Universe 开放平台首页" loading="lazy"><img v-else-if="entry.project.id === '02'" class="aiar-cover" src="/media/aiar/gudao.png" width="420" height="290" alt="水峪嘴村京西古道的 AR 驼队合影" loading="lazy"><ProjectArtwork v-else :variant="entry.index + 1"/></button><div class="work-copy"><h2 class="serif"><button :aria-expanded="selectedProject === entry.project.id" @click="selectedProject = selectedProject === entry.project.id ? null : entry.project.id">{{ entry.project.title }}</button></h2><p>{{ entry.project.tags }}</p><span class="case-status" :class="{ 'is-draft': entry.project.status === 'draft' }">{{ statusLabel(entry.project, selectedProject === entry.project.id) }}</span></div><button class="work-arrow" :aria-label="(selectedProject === entry.project.id ? '收起 ' : '展开 ') + entry.project.title" :aria-expanded="selectedProject === entry.project.id" @click="selectedProject = selectedProject === entry.project.id ? null : entry.project.id">{{ selectedProject === entry.project.id ? '−' : '↗' }}</button><div v-if="selectedProject === entry.project.id" :id="'case-' + entry.project.id" :class="['01', '02'].includes(entry.project.id) ? 'full-case-detail' : 'case-detail'"><UniverseCase v-if="entry.project.id === '01'"/><AiArCase v-else-if="entry.project.id === '02'"/><template v-else><p class="eyebrow">项目笔记 / {{ entry.project.id }}</p><div><p class="serif">{{ entry.project.description }}</p><p>{{ entry.project.detail }}</p></div></template></div></article>
           </div>
         </section>
       </template>
@@ -289,17 +304,16 @@ async function send(value = question.value) {
       <template v-else>
         <section class="editorial-intro"><p class="eyebrow">{{ copy?.eyebrow }}</p><div class="editorial-heading"><h1 ref="title" tabindex="-1" class="serif"><span v-for="line in copy?.lines" :key="line">{{ line }}</span></h1><p class="serif">{{ copy?.description }}</p></div></section>
         <template v-if="page === 'background'">
-          <div class="notice-row"><p class="content-notice">实践记录 / 按时间倒序排列，包含工作与实习经历。</p><a class="text-link resume-link" :href="resume.href" :download="resume.filename"><span>下载简历</span><span class="resume-link-meta">{{ resume.meta }}</span><span class="resume-link-arrow" aria-hidden="true">↓</span></a></div>
-          <section class="editorial-rows" aria-label="开发经历"><article v-for="(item, index) in experience" :key="item.title" :id="'experience-' + index" class="editorial-row reveal" data-section :data-index="index" v-tilt="1.2"><p class="eyebrow">{{ item.period }}</p><div><h2 class="serif">{{ item.title }}</h2><p class="row-place">{{ item.place }}</p></div><div class="row-detail"><p class="row-description">{{ item.description }}</p><ul v-if="item.points.length" class="row-points"><li v-for="point in item.points" :key="point">{{ point }}</li></ul></div></article></section>
-          <section id="background-education" class="education-section" aria-labelledby="education-title" data-section :data-index="5"><div class="education-heading"><p class="eyebrow">背景 / 教育</p><h2 id="education-title" class="serif">教育背景</h2><p>英属哥伦比亚大学 / 2016 — 2022</p></div><article v-for="item in education" :key="item.title" class="editorial-row reveal" v-tilt="1.2"><p class="eyebrow">{{ item.period }}</p><div><h3 class="serif">{{ item.title }}</h3><p class="row-place">{{ item.place }}</p></div><p class="row-description">{{ item.description }}</p></article></section>
-          <section id="background-skills" class="education-section skills-section" aria-labelledby="skills-title" data-section :data-index="6"><div class="education-heading"><p class="eyebrow">背景 / 技术</p><h2 id="skills-title" class="serif">技术背景</h2><p>编程语言、软件、硬件与 AI 工具</p></div><article v-for="group in skills" :key="group.label" class="skill-row reveal"><p class="eyebrow">{{ group.label }}</p><ul class="skill-items"><li v-for="item in group.items" :key="item">{{ item }}</li></ul></article></section>
+          <div class="notice-row"><p class="content-notice">工作与实习</p><a class="text-link resume-link" :href="resume.href" :download="resume.filename"><span>下载简历</span><span class="resume-link-meta">{{ resume.meta }}</span><span class="resume-link-arrow" aria-hidden="true">↓</span></a></div>
+          <section class="editorial-rows" aria-label="开发经历"><article v-for="(item, index) in experience" :key="item.title" :id="'experience-' + index" class="editorial-row reveal" data-section :data-index="index" v-tilt="1.2"><p class="eyebrow">{{ item.period }}</p><div><h2 class="serif">{{ item.title }}</h2><p class="row-place">{{ item.place }}</p></div><div class="row-detail"><p v-if="item.description" class="row-description">{{ item.description }}</p><ul v-if="item.points.length" class="row-points"><li v-for="point in item.points" :key="point">{{ point }}</li></ul></div></article></section>
+          <section id="background-education" class="education-section" aria-labelledby="education-title" data-section :data-index="5"><div class="education-heading"><p class="eyebrow">教育</p><h2 id="education-title" class="serif">教育</h2></div><article v-for="item in education" :key="item.title" class="editorial-row reveal" v-tilt="1.2"><p class="eyebrow">{{ item.period }}</p><div><h3 class="serif">{{ item.title }}</h3><p class="row-place">{{ item.place }}</p></div><p class="row-description">{{ item.description }}</p></article></section>
+          <section id="background-skills" class="education-section skills-section" aria-labelledby="skills-title" data-section :data-index="6"><div class="education-heading"><p class="eyebrow">技术</p><h2 id="skills-title" class="serif">技术</h2></div><article v-for="group in skills" :key="group.label" class="skill-row reveal"><p class="eyebrow">{{ group.label }}</p><ul class="skill-items"><li v-for="item in group.items" :key="item">{{ item }}</li></ul></article></section>
         </template>
         <template v-else-if="page === 'labs'">
-          <p class="content-notice">探索记录 / 逐条记录测试条件、取舍与结论边界。</p>
           <section class="editorial-rows" aria-label="技术探索"><article v-for="(item, index) in explorations" :key="item.id" :id="'labs-' + index" class="editorial-row reveal" data-section :data-index="index"><p class="eyebrow">{{ item.id }} / {{ item.topic }}</p><div><h2 class="serif">{{ item.title }}</h2><p class="row-place">{{ item.status }}</p></div><div class="row-detail"><p class="row-description">{{ item.summary }}</p><button class="text-link explore-toggle" :aria-expanded="expandedExploration === item.id" :aria-controls="'labs-case-' + item.id" @click="toggleExploration(item.id)">{{ expandedExploration === item.id ? '收起完整记录 −' : '展开完整记录 ↗' }}</button></div><div v-if="expandedExploration === item.id" :id="'labs-case-' + item.id" class="full-case-detail"><ExplorationCase /></div></article></section>
         </template>
         <template v-else-if="page === 'contact'">
-          <section class="editorial-rows" aria-label="联系信息"><article id="contact-email" class="editorial-row reveal" data-section :data-index="0"><p class="eyebrow">邮箱</p><h2><a :href="'mailto:' + profile.email">{{ profile.email }}</a></h2><p class="row-description">优先通过邮件联系，可附项目背景与时间安排。</p></article><article id="contact-phone" class="editorial-row reveal" data-section :data-index="1"><p class="eyebrow">电话</p><h2><a :href="'tel:' + profile.phone.replace(/[^+\d]/g, '')">{{ profile.phone }}</a></h2><p class="row-description">如需即时沟通，可以直接拨打。</p></article><article id="contact-github" class="editorial-row reveal" data-section :data-index="2"><p class="eyebrow">GitHub</p><h2><a :href="profile.github" target="_blank" rel="noreferrer">github.com/nancywan1004</a></h2><p class="row-description">代码仓库入口。</p></article></section><div class="contact-action"><p class="serif">实时三维与交互开发相关合作</p><a class="text-link" :href="'mailto:' + profile.email">写邮件 ↗</a></div>
+          <section class="editorial-rows" aria-label="联系信息"><article id="contact-email" class="editorial-row reveal" data-section :data-index="0"><p class="eyebrow">邮箱</p><h2><a :href="'mailto:' + profile.email">{{ profile.email }}</a></h2></article><article id="contact-phone" class="editorial-row reveal" data-section :data-index="1"><p class="eyebrow">电话</p><h2><a :href="'tel:' + profile.phone.replace(/[^+\d]/g, '')">{{ profile.phone }}</a></h2></article><article id="contact-github" class="editorial-row reveal" data-section :data-index="2"><p class="eyebrow">GitHub</p><h2><a :href="profile.github" target="_blank" rel="noreferrer">github.com/nancywan1004</a></h2></article></section>
         </template>
       </template>
       <footer class="page-footer"><button class="text-link" @click="go('home')">← 返回首页</button><span>{{ page === 'work' ? '空间 · 图形 · 交互' : '万乐琪 / 三维图形与交互开发' }}</span><button v-if="assistantEnabled" class="text-link footer-assistant" @click="go('chat')">作品集助手 ↗</button></footer>

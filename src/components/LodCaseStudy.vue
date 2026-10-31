@@ -108,19 +108,6 @@ const budgetResults = [
       </div>
     </article>
 
-    <section class="round result-round" aria-labelledby="lod-result-title">
-      <div class="round-label"><span>06</span><p>结果汇总</p></div>
-      <div class="round-body">
-        <h4 id="lod-result-title">优化结果与工程沉淀</h4>
-        <dl class="result-list">
-          <div><dt>运行时 CPU</dt><dd><strong>约 −77%</strong><p>停止首屏后无效轮询，拆分增量更新与全量重建。京东轮询修复阶段，viewer-bundle 累计采样时间由 7569.1 降至 1713.0 ms。</p></dd></div>
-          <div><dt>叶块管理开销</dt><dd><strong>49.8 → 6.2 <small>ms</small></strong><p>Poland 叶块由 32,752 减至 4,096，update P50 随之下降；变清晰 P50 同时由 6.503 增至 11.900 秒。切分粒度需要同时权衡管理成本与细节恢复。</p></dd></div>
-          <div><dt>加载与精度取舍</dt><dd><strong>29.7 → 18.9 <small>s</small></strong><p>南广场预算从 6M 调到 2.5M，首屏耗时下降，记录帧率从 45 到 60；平均显示点数也从 5.84M 降到 2.42M。桌面默认采用 2.5M，并保留质量档；移动端默认配置为 1M。</p></dd></div>
-          <div><dt>验证与回归</dt><dd><strong>从经验调参到基线对照</strong><p>建立原始调度对标、单变量实验、正确性检查与版本回归；每轮区分运行时修复、资产变化和画质取舍，结果用于决定下一轮动作。</p></dd></div>
-        </dl>
-        <p class="result-note">已收敛调度修复与设备默认配置，阶段收益如上；当前版本对官方 Viewer 的统一复测，以及部分场景的换档尾部问题，仍未完整闭环。</p>
-      </div>
-    </section>
   </CaseStudy>
 </template>
 

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import CaseStudy from './CaseStudy.vue'
-
-const emit = defineEmits<{ 'open-shader': [] }>()
 </script>
 
 <template>
@@ -85,27 +83,11 @@ const emit = defineEmits<{ 'open-shader': [] }>()
       </div>
     </article>
 
-    <section class="round result-round" aria-labelledby="relighting-result-title">
-      <div class="round-label"><span>05</span><p>结果汇总</p></div>
-      <div class="round-body">
-        <h4 id="relighting-result-title">从明暗调节到局部创作与观看交付</h4>
-        <dl class="result-list">
-          <div><dt>可编辑能力</dt><dd><strong>全局调光 → 局部亮灯 → 交互探索</strong><p>接入独立灯光、笔刷区域、局部辉光与手电筒，让扫描场景支持局部明暗编辑与夜游交互。</p></dd></div>
-          <div><dt>空间数据与成本</dt><dd><strong>世界区域 → 同源体积 → 视角重投影</strong><p>区域点集可保存，调亮与辉光使用同一空间源；逐 splat 热路径不再遍历已提交点集，同时保留烘焙成本与体素精度的取舍。</p></dd></div>
-          <div><dt>管线一致性</dt><dd><strong>按需启用 / 开场门控 / 色彩恢复</strong><p>处理镜头滑动、近景点阵、提交跳变与后处理误启用，将局部效果接入编辑和观看共用的输出链。</p></dd></div>
-          <div><dt>配置交付</dt><dd><strong>灯与区域配置保存恢复</strong><p>通过 settings 与编辑协议传递参数，在编辑态和观看态复用光照链路；维护 GLSL / WGSL 对应实现。手电筒开关保留为会话态。</p></dd></div>
-        </dl>
-        <p class="result-note">重光照作为贡献者接入统一 Shader 管理，处理材质重建与效果切换。所有权与仲裁的完整设计集中在 Shader 章节。</p>
-        <a class="demo-link ownership-reference" href="#work/universe/shader/ownership" @click.prevent="emit('open-shader')">查看 Shader 所有权与仲裁 ↗</a>
-        <details><summary>补充能力与结果口径</summary><div class="detail-content"><p>原文还记录放置资产的接影与屏幕空间叠影，主场景高斯以接影为主，不能概括为完整双向物理光照。</p><p>以上为《重光照系统项目介绍-STAR》记录的实现结果。本轮接入未重新运行功能与性能测试；材料未提供同设备、同场景的前后耗时对照，故不填 FPS 或提升百分比。</p></div></details>
-      </div>
-    </section>
   </CaseStudy>
 </template>
 
 <style scoped>
-.ownership-reference{margin:12px 0;min-height:28px;line-height:28px;white-space:nowrap}
 .spatial-diagram{display:block;width:640px;max-width:100%;height:auto;margin:0 auto 18px}
-.lighting-controls{display:grid;grid-template-columns:1fr 1fr;gap:22px;border-block:1px solid var(--line);padding:20px 0}.lighting-controls span,.lighting-controls b{display:block}.lighting-controls b{font-size:16px;font-weight:400;margin-top:7px}.lighting-controls p{font-size:12px;color:var(--muted);margin:5px 0 0}.volume-comparison{margin:24px 0;padding:22px 24px;background:#efefe8;border:1px solid #e3e3d9}.volume-comparison figcaption{font-size:12px;margin-bottom:16px}.volume-comparison>div{display:grid;grid-template-columns:70px minmax(0,1fr);gap:5px 14px;padding:14px 0;border-top:1px solid var(--line)}.volume-comparison>div>span{font-size:11px;color:var(--muted)}.volume-comparison b{font-size:15px;font-weight:400;overflow-wrap:anywhere}.volume-comparison small{grid-column:2;font-size:11px;color:var(--muted)}.bloom-fixes{margin:22px 0;font-size:12px}.bloom-fixes>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding:13px 0;border-top:1px solid var(--line)}.bloom-fixes dt{color:var(--muted)}.bloom-fixes dd{margin:0;color:#5d5f56}.demo-link{display:inline-block;font-size:12px;color:var(--ink);padding-bottom:4px;border-bottom:1px solid var(--muted);text-decoration:none}.result-note a{color:inherit;text-underline-offset:3px}
+.lighting-controls{display:grid;grid-template-columns:1fr 1fr;gap:22px;border-block:1px solid var(--line);padding:20px 0}.lighting-controls span,.lighting-controls b{display:block}.lighting-controls b{font-size:16px;font-weight:400;margin-top:7px}.lighting-controls p{font-size:12px;color:var(--muted);margin:5px 0 0}.volume-comparison{margin:24px 0;padding:22px 24px;background:#efefe8;border:1px solid #e3e3d9}.volume-comparison figcaption{font-size:12px;margin-bottom:16px}.volume-comparison>div{display:grid;grid-template-columns:70px minmax(0,1fr);gap:5px 14px;padding:14px 0;border-top:1px solid var(--line)}.volume-comparison>div>span{font-size:11px;color:var(--muted)}.volume-comparison b{font-size:15px;font-weight:400;overflow-wrap:anywhere}.volume-comparison small{grid-column:2;font-size:11px;color:var(--muted)}.bloom-fixes{margin:22px 0;font-size:12px}.bloom-fixes>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding:13px 0;border-top:1px solid var(--line)}.bloom-fixes dt{color:var(--muted)}.bloom-fixes dd{margin:0;color:#5d5f56}.demo-link{display:inline-block;font-size:12px;color:var(--ink);padding-bottom:4px;border-bottom:1px solid var(--muted);text-decoration:none}
 @media(max-width:600px){.lighting-controls{grid-template-columns:1fr;gap:16px}.lighting-controls b{font-size:14px}.volume-comparison{padding:17px 14px}.volume-comparison>div{grid-template-columns:52px minmax(0,1fr);gap:6px 10px}.volume-comparison b{font-size:13px}.volume-comparison small{font-size:10px}.bloom-fixes>div{grid-template-columns:1fr;gap:5px}}
 </style>

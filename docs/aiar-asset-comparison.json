@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-30",
+  "method": "GLB JSON/BIN parsing; PNG IHDR and JPEG SOF inspection; no runtime benchmark",
+  "before": {
+    "path": "/Users/leqiwan/Desktop/shuyuan_wlq/AR-VPS智能导览/马致远-混元glb.glb",
+    "sha256": "f211c4ec49024dce100b4e290d2b0f6103c602a9537a75a0788ab5222902dbeb",
+    "fileBytes": 43772960,
+    "generator": "Khronos glTF Blender I/O v4.0.43",
+    "imageBytes": [
+      4554312,
+      13691286,
+      9564228
+    ],
+    "imageDimensions": [
+      4096,
+      4096
+    ],
+    "imageMime": "image/png",
+    "geometryBytes": 15961132,
+    "positionCount": 311312,
+    "indexCount": 1499787,
+    "triangles": 499929
+  },
+  "after": {
+    "path": "/Users/leqiwan/Desktop/shuyuan_wlq/AR-VPS智能导览/马致远-混元压缩.glb",
+    "sha256": "9d5ab61ff137147562e1cf57792a58864501555cc5dbfb7c38e27becb8ab69d3",
+    "fileBytes": 1406636,
+    "generator": "glTF-Transform v4.0.1",
+    "imageBytes": [
+      29351,
+      131238,
+      94342
+    ],
+    "imageDimensions": [
+      1024,
+      1024
+    ],
+    "imageMime": "image/jpeg",
+    "geometryBytes": 1149777,
+    "geometryExtension": "KHR_draco_mesh_compression",
+    "positionCount": 311928,
+    "indexCount": 1499787,
+    "triangles": 499929
+  },
+  "fileReductionPercent": 96.78651843512525,
+  "limitations": [
+    "Supplied local asset samples; production download identity not verified.",
+    "No command or JPEG quality settings preserved.",
+    "No visual or runtime loading/FPS benchmark.",
+    "RGBA8 pixel storage estimate excludes mipmaps, padding and copies; not measured GPU memory."
+  ]
+}
