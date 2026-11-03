@@ -564,3 +564,55 @@ R_i 控制各条曲线的空间姿态；轴长、角度分布与正交相机共�
 ## 删除公开页面的提交记录（2026-10-31）
 
 - 按用户要求移除 AI + AR 页面的提交哈希与版本追溯说明，折叠内容仅保留坐标转换技术细节；核查依据留在内部文档。
+
+## 两个工作项目的外部资料登记（2026-11-02）
+
+- 用户补充两个官方项目页：`https://www.yumebau.com/project/buildport-xumia/`、`https://www.yumebau.com/project/acronym/`。本轮只把可核对的公开描述与入口接入项目 03 / 04，不改案例结构与视觉。
+- `Project` 新增可选 `source`（`href` + `label`），仅用于登记官方项目页；项目笔记面板在 `detail` 之后渲染该外链，其余项目不受影响。
+- 项目 04 标题按官方写法改为 `BUILDPORT XUMIA`（原 `Builport` 为拼写错误），分类改为「Meta Quest 空间计算游戏」，描述取自官方页：面向空间计算从头设计的城市建造游戏、物理空间作为画布、含 Core Siege 模式、标注已在 Meta Quest 上线。
+- 项目 03 分类改为「品牌化 ARG / YumeGO 平台」，描述取自官方页：与 ACRONYM、ASUS、ROG 合作、随处可玩的 AR 游戏、50 余个地理定位限时传送门、定制后台与洛杉矶发布活动。
+- 官方页只描述产品与工作室合作方，未说明个人分工；因此 `detail` 仍保留待补充项，不据页面把平台/团队成果写作个人贡献。年份沿用简历在职区间（03 为 2023，04 为 2023—2024），不采用页面 `Year 2026` 元数据。
+- 验证：类型检查与生产构建通过；两个项目笔记面板显示官方链接，`target="_blank"` 与 `rel="noopener"` 生效。
+
+### 用户补充个人贡献后的改写
+
+- 用户提供两份项目说明，按「简介 + 角色 + 分组要点」重组 03 / 04，两条从 `draft` 改为 `published`（列表状态文案变为「项目笔记」）。
+- 项目 03 更名 `YumeGO AR / ACRONYM`，定位改为 AR Content Delivery Platform（AssetBundle 热更分发 + 模板化定制交付），角色写明「SDK 与内容研发，0→1 完成 ACRONYM 交付」；要点分 SDK 平台（Lua SDK 调 C#，含 Coroutine / Timeline）、玩法与交付（Lua + C# 站点式多轮 DDoS 墙、线下解锁站点快闪、Timeline 开场与移动端渲染优化）、项目范围（官方页登记的 50 余个传送门与洛杉矶发布活动）。
+- 项目 04 简介补「自研 Roblox 风格 Build + Battle 的 VR 多人在线社交游戏」，角色为 Unity 系统与工具工程师；要点分系统（Zenject 按关卡运行时按需注入、SceneManager 生命周期、本地 + 云端内置与 UGC 素材库、submodule 关联独立 content 仓库做版本校验）、工具（UI Toolkit 编辑器内武器组装工具、UI Toolkit 运行时 Debug 工具支持 VR Pointer）、交互（MVC 运行时 VR 腕带菜单选择 parts 与 avatar）。
+- 数据层新增 `Project.sections`（`title` + `items[]`）；项目笔记面板按组渲染为破折号列表，样式与背景页 `.row-points` 对齐。原 `.case-detail div>p:last-child` 依赖「最后一段」定位，加入外链后失效，改为显式 `.case-note-meta` 类，保持 14px 正文与手机 11px。
+- 仅采用用户描述中的事实：不补造多人同步规模、DAU、帧率等未提供的数字。用户原文「虚拟 AERolson IP」拼写未确认（疑为 ACRONYM 主理人 Errolson Hugh），网页暂写「虚拟 IP 创意快闪体验」，待确认主体名称后再补。
+- IDE 诊断无错误；`npm run build` 在本轮未能执行（命令授权提示超时被取消），因此不做构建通过的声明。
+- 用户要求正文不出现「官方页面登记」这类出处说明。已删除项目 03 / 04 正文中的出处措辞（改为直接陈述项目规模与上线状态），外链标签简化为「ACRONYM 项目页」「BUILDPORT XUMIA 项目页」。来源仍只保留在内部文档，不在页面重复声明。
+
+## VR 数字人 demo 与 ACRONYM 视频入口（2026-11-03）
+
+- 探索页新增第 02 条「VR + 3DGS 数字人导览」（`#labs/02`）：UE5.8 + XGRIDS LCC 插件接入 3DGS 场景，数字人做 VR 导览；问题时 retarget 骨骼动画后手指关节未与骨骼贴合、指向动画不自然，处理方式是打通 GPT Astra 调用 Unreal MCP Tools 在引擎内定位并修正。
+- 素材：`public/media/vr-demo/vr-demo-3dgs.mp4`。无 poster，视频块按 16/9 占位，`preload="none"`，点击后播放；未提取封面，不改动原文件。
+- `ExplorationCase.vue` 改为接收 `id`：`01` 保留原数字人建模工作流，`02` 渲染 demo 与手骨修正两个块，沿用同一套 scoped 样式，不新建组件、不复制样式。
+- 项目 03 新增 `clips` 两条小红书入口（ACRONYM 上线版演示、YumeGO AR 游戏 Demo），站内只给外链与平台名，不内嵌第三方播放器。`Project` 类型增加可选 `clips`（含可选 `cover`），笔记面板在要点之后渲染。
+- 封面：用户要求直接用小红书原封面。服务端抓取不可行（详见下一条），最终由用户提供两条 `sns-webpic-qc.xhscdn.com` 封面地址，用 curl 带小红书 Referer 下载为 `public/media/acronym/acronym-launch-cover.webp`（640×853，10,320 B）与 `yumego-demo-cover.webp`（828×1104，105,560 B）。两张均为 3:4，与缩略图槽位比例一致，无需裁切；只取封面，未下载或播放视频。来源、尺寸与 SHA-256 记录在 `acronym-clip-covers.json`。图片缺失时 `@error` 仍会移除，链接与文字不受影响。
+- 2026-10-28 那轮能取到封面，是因为在已渲染的浏览器页面里读页面图片（记录中每条同时含站点 logo 与 `sns-webpic-qc.xhscdn.com/.../spectrum/...` 两条）；本轮环境无浏览器工具，本机 Chrome 无头模式被判定为「安全限制」，加反自动化参数后虽加载出页面外壳，但 `feed.feeds` 为空、未登录不返回笔记详情。结论：服务端无法取得封面，需用户本地导图。
+- 链接与标题按用户提供的分享文案更新为 bot 分享的 pc_web 地址与真实标题（ACRONYM ARG 上线演示 / 科幻风 AR 解谜游戏 Demo）。
+
+### 项目笔记与前两条案例的栅格对齐
+
+- 问题：01 / 02 用 `.full-case-detail`（`grid-column:1/-1`），03 / 04 用 `.case-detail`（原 `grid-column:2/5` 且内部再分 33% / 1fr），因此后两条的笔记缩在右侧约 22% 之后，左边界比前两条靠里约 260px。
+- 改法：`.case-detail` 改为 `grid-column:1/-1`、`grid-template-columns:22% 1fr`，与 `.work-row` 的元信息列对齐；`case-note-meta`、`note-groups`、`note-clips` 限宽 760–820px 保证行长。分组标题与演示标签改为块级位于列表上方，不再在右侧栏里再套一层两列。
+- 手机断点：`.case-detail` 的 `grid-column` 从 `1/3` 改为 `1/-1`，分组与演示保持单列。
+- 验证：1440 下 `.case-detail` 左边界 214px、宽 1180px，与 `.work-row` 完全一致（此前约 474px 起）；390 下 `scrollWidth == clientWidth == 390`，无横向溢出。截图 `/tmp/note03.png`、`/tmp/note03-mobile.png`（临时验证文件，未入库；验证脚本已删除）。
+
+### VR 导览 Demo 按 STAR 文档展开（2026-11-03）
+
+- 依据用户新增的 `docs/VR_DEMO_STAR.md`（原位于 `public/media/vr-demo/`，含面试稿，已移出 public 以免构建后被公开访问），把探索页 02 从两段说明扩为 8 个块：演示 / 导览流程 / 动画链路 / MCP 辅助重定向迁移 / 跨骨架手势修复 / 可打断的导览交互 / 导航方向平滑 / 后续方向。
+- 只同步探索类内容；STAR 面试表达、一分钟与三分钟口述、常见追问、能力小结、简历表述一律不进网页。第 2 节的功能范围表压缩为文中边界说明（自由问答未实现、头显内 UI 与真人噪声场景待验收）。
+- 事实口径沿用文档：MCP 四节点重建并编译保存成功、123 行 PIE 窗口无错误、12 个指骨修复、非目标骨骼平移差 0、最大旋转差约 0.0000024°、45 帧起 1.2 秒过渡、0.08 s 时间常数与 15° 滞后、20 条文字用例 / 7 项 PIE / 4 条语音 / 2 项会话隔离。不写入文档明确否认的“自动蒙皮权重”，也不补造效率或自然度提升比例。
+- 3 张 Mermaid 流程图未转 SVG，改为有序列表与表格表达；`.block-body` 增加 ol/ul/code/table 的 scoped 样式，表格复用 `.metrics`。
+- 验证：构建通过；1440 下 8 个块、表格 720px，`scrollW == clientW`；390 下表格 343px、无横向溢出。截图 `/tmp/labs02-desktop.png`、`/tmp/labs02-mobile.png`。
+
+### 演示封面放大
+
+- 用户反馈 03/04 的图仍明显小于前两条。实测：01 的案例媒体宽 1012px、02 为 379–1180px，而 03 当时只有 64×88 的缩略图，04 没有任何媒体，视觉上自然偏小。
+- 改为两列卡片：`.note-clips ul` 用 `repeat(2,minmax(0,300px))`，封面按 3/4 撑满列宽（300×400），标题与平台放在封面下方；手机两列各 169×229，仍无横向溢出。
+- 验证：1440 下两张封面实测 300×400、`scrollW == clientW == 1440`；390 下 169×229、无溢出。截图 `/tmp/note03-desktop-v2.png`、`/tmp/note03-mobile-v2.png`（临时文件）。
+- 未补造用户未说明的信息：MCP 工具清单、修正前后对照、视频时长与分辨率均未写入，正文标为待补。视频内容本轮未打开查看。
+- 验证：`npm run build` 通过（仅保留既有的大 chunk 提示）；IDE 诊断无错误。浏览器内播放、外链可达性与两种断点排版未实测。

@@ -29,6 +29,12 @@ export type Project = {
   description: string
   detail: string
   status: ProjectStatus
+  // 项目笔记的分组要点：标题为技术方向（系统 / 工具 / 玩法等），条目写具体做法。
+  sections?: { title: string; items: string[] }[]
+  // 外部演示：平台原生播放，站内只做入口。
+  clips?: { label: string; platform: string; href: string; cover?: string }[]
+  // 官方项目页：仅登记可核对外部来源，不据此推断个人职责。
+  source?: { href: string; label: string }
 }
 
 export const projects: Project[] = [
@@ -40,25 +46,84 @@ export const projects: Project[] = [
     status: 'published'
   },
   {
-    id: '02', kind: 'work', title: 'AI + AR 随身导览', category: 'AR 导览与景区小程序', year: '2024 — 至今',
+    id: '02', kind: 'work', title: 'AI + AR 随身导览', category: 'AR 导览与景区小程序', year: '2025',
     tags: '小程序 · XR-Frame · 自研 VPS · Unicity',
     description: '村史馆验证室内空间导览原型；VPS 定位与纯 AR 打卡体验上线于水峪嘴村小程序。',
     detail: 'WASM 图像转换 / 坐标对齐 / Unicity 建图与摆点 / AR 渲染与内存',
     status: 'published'
   },
   {
-    id: '03', kind: 'work', title: 'YumeGO AR', category: '移动端 AR 游戏', year: '2022 — 2024',
-    tags: 'iOS / Android · Unity · AR Foundation · Lua',
-    description: '与时尚品牌合作的多人多地 AR 寻宝游戏，融合协作解谜玩法与 AI 对话体验，已在全球上线。',
-    detail: '待补充：多人同步、玩法编排、上线迭代。',
-    status: 'draft'
+    id: '03', kind: 'work', title: 'YumeGO AR / ACRONYM', category: 'AR 内容分发平台 / 品牌化 ARG', year: '2023',
+    tags: 'Unity · Lua / xLua · AssetBundle · Timeline',
+    description: 'AR Content Delivery Platform：以 AssetBundle 热更分发游戏内容的平台，用模板加定制化的方式开发和交付项目。与 ACRONYM、ASUS、ROG 合作的全球品牌化 ARG 由此平台承载。',
+    detail: '角色：SDK 与内容研发，从 0 到 1 完成 ACRONYM 项目交付。',
+    status: 'published',
+    sections: [
+      {
+        title: 'SDK 平台',
+        items: [
+          '扩展 Lua SDK 调用 Unity C# 的能力，覆盖 Coroutine、Timeline 等异步与时间轴接口，让玩法脚本可以驱动引擎侧的运行时逻辑。'
+        ]
+      },
+      {
+        title: '玩法与交付',
+        items: [
+          '用 Lua + C# 独立实现基于站点的多轮线上 DDoS 墙玩法，以及线下解锁站点的虚拟 IP 创意快闪体验。',
+          '用 Timeline 制作开场动画，并与美术团队协作完成移动端渲染效果优化。'
+        ]
+      },
+      {
+        title: '项目范围',
+        items: [
+          '随处可玩的 AR 游戏、50 余个地理定位限时传送门与定制后台，最终导向洛杉矶产品发布活动。'
+        ]
+      }
+    ],
+    clips: [
+      {
+        label: 'ACRONYM ARG 上线演示',
+        platform: '小红书',
+        cover: '/media/acronym/acronym-launch-cover.webp',
+        href: 'https://www.xiaohongshu.com/discovery/item/6420f9ef0000000013015b18?source=webshare&xhsshare=pc_web&xsec_token=ABceApk3-ITJriTXFw0yBc3M25yLzA9SOzrNCoRuRf-1U=&xsec_source=pc_share'
+      },
+      {
+        label: '科幻风 AR 解谜游戏 Demo',
+        platform: '小红书',
+        cover: '/media/acronym/yumego-demo-cover.webp',
+        href: 'https://www.xiaohongshu.com/discovery/item/6415e0e20000000012030685?source=webshare&xhsshare=pc_web&xsec_token=ABYD3voo4S5U201w7QR2eGMr3u9w195Kay_cP0ic-d6l8=&xsec_source=pc_share'
+      }
+    ],
+    source: { href: 'https://www.yumebau.com/project/acronym/', label: 'ACRONYM 项目页' }
   },
   {
-    id: '04', kind: 'work', title: 'Yumebau VR', category: 'Meta Quest 自研游戏', year: '2022 — 2024',
-    tags: 'Unity · Meta Quest · VR · 中台工具',
-    description: '自研 VR 游戏 IP 的内容配置系统、腕带 UI 菜单与中台软件包研发。',
-    detail: '待补充：内容管线、热补丁、编辑器扩展。',
-    status: 'draft'
+    id: '04', kind: 'work', title: 'BUILDPORT XUMIA', category: 'Meta Quest 空间计算游戏', year: '2023 — 2024',
+    tags: 'Unity · Zenject · UI Toolkit · Meta Quest',
+    description: '自研 Roblox 风格 Build + Battle 的 VR 多人在线社交游戏：面向空间计算从头设计，物理空间作为数字都市的画布，含 Core Siege 模式，已上线 Meta Quest。',
+    detail: '角色：Unity 系统与工具工程师。',
+    status: 'published',
+    sections: [
+      {
+        title: '系统',
+        items: [
+          '用 Zenject 按关卡在运行时按需注入实例绑定，并通过 SceneManager 管理场景加载的生命周期。',
+          '搭建本地 + 云端的内置素材与 UGC 素材库管理系统；以 submodule 关联独立的 GitHub content 仓库，做内容版本校验。'
+        ]
+      },
+      {
+        title: '工具',
+        items: [
+          '配合玩法开发，基于 Unity UI Toolkit 做编辑器内的武器组装工具：配置物理交互、材质与几何，并绑定 ScriptableObject 与 Prefab。',
+          '同样基于 UI Toolkit 做运行时 Debug 工具，支持 VR Pointer 交互。'
+        ]
+      },
+      {
+        title: '交互',
+        items: [
+          '以 MVC 结构实现运行时 VR 腕带菜单，用于选择组装自定义武器的 parts 与本体 avatar 形象。'
+        ]
+      }
+    ],
+    source: { href: 'https://www.yumebau.com/project/buildport-xumia/', label: 'BUILDPORT XUMIA 项目页' }
   },
   {
     id: '05', kind: 'personal', title: 'WebGPU Shader 实验', category: '实时图形', year: '进行中',
@@ -93,6 +158,13 @@ export const explorations: Exploration[] = [
     topic: '生成式建模 / 角色动画',
     status: '初步测试 · 2026.09',
     summary: '同一份三视图下，比较基模生成、骨骼绑定与面部动画的可行方案。',
+  },
+  {
+    id: '02',
+    title: 'VR + 3DGS 数字人导览',
+    topic: 'UE5 / 3DGS / 数字人动画',
+    status: '技术探索 · 2026.11',
+    summary: '在 UE5.8 与 XGRIDS LCC 的 3DGS 场景中做多展点数字人导览：MCP 辅助动画重定向迁移、跨骨架手型修复，以及可打断的文字与语音交互。',
   },
 ]
 

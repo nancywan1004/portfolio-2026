@@ -1,0 +1,28 @@
+[
+  {
+    "clip": "ACRONYM ARG 上线演示",
+    "noteId": "6420f9ef0000000013015b18",
+    "source": "https://sns-webpic-qc.xhscdn.com/202611031116/18387ab4eb02f4cb8a2345d711b92d57/1000g00828fh6kmkfk00g5nutckp09606qun4hi8!nc_n_webp_prv_1",
+    "providedBy": "用户提供（小红书封面图地址）",
+    "collectedDate": "2026-11-03",
+    "localCover": "public/media/acronym/acronym-launch-cover.webp",
+    "format": "WebP",
+    "size": "640x853",
+    "bytes": 10320,
+    "sha256": "acb7a86b5fb2ac1964fc1865331146dcb8a43be38dc96c90f360079283b3347a",
+    "scope": "仅封面图，未下载或播放视频。"
+  },
+  {
+    "clip": "科幻风 AR 解谜游戏 Demo",
+    "noteId": "6415e0e20000000012030685",
+    "source": "https://sns-webpic-qc.xhscdn.com/202611031118/c9a44d5ba1ebc26f6d6a66e4cc31f3ff/1000g0082747p2qqfk0005nutckp09606s4lrm30!nd_dft_wlteh_webp_3",
+    "providedBy": "用户提供（小红书封面图地址）",
+    "collectedDate": "2026-11-03",
+    "localCover": "public/media/acronym/yumego-demo-cover.webp",
+    "format": "WebP",
+    "size": "828x1104",
+    "bytes": 105560,
+    "sha256": "42196b5522fa9dec7d390509ee894a3afec62907ac79b0339a7029c8554282f5",
+    "scope": "仅封面图，未下载或播放视频。"
+  }
+]

@@ -252,3 +252,17 @@
 - 用户确认原YUV→RGB常需7秒以上，WASM后转换耗时约为原来的1/10。仅指转换环节，不是整体定位；用户阶段记录可引用，无需再写“没有任何性能依据”，但不冒充本轮复测。
 - yuvToImageC的C实现与Emscripten产物已核对；写为通过emsdk工具链编译C到WASM，不称emsdk是运行时模块。
 - 三技术点改为单层直接展示，每条问题/处理/结果+一个折叠细节，取消套用Universe的多级模块与内部编号。资产压缩目的是减少加载和渲染成本，环境光/预加载/告警回收合并为辅助处理，不再各自大篇展开。
+
+## 工作项目官方页面补充（2026-11-02）
+
+- 用户提供 YumeBau 官方项目页：BUILDPORT XUMIA（`/project/buildport-xumia/`）、ACRONYM（`/project/acronym/`）。
+- 两页只说明产品定位、平台与合作方：XUMIA 为面向空间计算的城市建造游戏、含 Core Siege 模式、标注上线 Meta Quest；ACRONYM 为与 ACRONYM / ASUS / ROG 合作的品牌化 ARG，含 50 余个地理定位限时传送门、定制后台与洛杉矶发布活动。
+- 用户随后补充个人贡献：项目 03 为 YumeGO AR SDK 与内容研发，0→1 交付 ACRONYM；项目 04 为 Unity 系统与工具工程师，负责 Zenject 注入与场景生命周期、素材库与 content 仓库版本校验、UI Toolkit 编辑器武器组装工具与运行时 Debug、MVC 腕带菜单。
+- 两条已由 draft 改为 published 的项目笔记：简介、角色、分组要点为正文，官方页作为外链来源；不补造用户未提供的规模与性能数字，也不把平台或团队成果算作个人贡献。
+
+## VR 数字人 demo 与视频入口（2026-11-03）
+
+- 探索页新增「VR + 3DGS 数字人导览」：UE5.8 + XGRIDS LCC 插件的 3DGS 场景，本地素材 `public/media/vr-demo/vr-demo-3dgs.mp4`；个人处理重点是 retarget 后手指关节未贴合导致的指向动画问题，做法是让 GPT Astra 调用 Unreal MCP Tools 在引擎内修正。
+- 项目 03 增加两条小红书演示入口（ACRONYM ARG 上线演示、科幻风 AR 解谜游戏 Demo），站内只给外链，不内嵌播放器；封面用用户提供的小红书原图，已缓存为本地 3:4 WebP，来源见 `acronym-clip-covers.json`。
+- 待补：MCP 工具的具体调用与修正前后对照、视频规格；视频内容未查看。
+- 2026-11-03 依据用户新增的 STAR 文档（`docs/VR_DEMO_STAR.md`）把该条扩为完整技术记录：导览流程、动画链路、MCP 辅助重定向迁移、跨骨架手型修复、可打断的文字与语音交互、导航方向平滑、后续方向；面试稿、追问与简历表述不进入网页。

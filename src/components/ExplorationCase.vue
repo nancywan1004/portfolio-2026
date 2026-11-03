@@ -1,11 +1,120 @@
 <script setup lang="ts">
 import CaseChapter from './CaseChapter.vue'
 
+defineProps<{ id: string }>()
+
 const media = '/media/explore/digital-human'
+const vrClip = '/media/vr-demo/vr-demo-3dgs.mp4'
 </script>
 
 <template>
   <div class="explore-case">
+    <template v-if="id === '02'">
+      <dl class="explore-facts">
+        <div><dt>时间</dt><dd>2026.11</dd></div>
+        <div><dt>引擎</dt><dd>UE5.8 · MetaHuman</dd></div>
+        <div><dt>场景与工具</dt><dd>XGRIDS LCC 3DGS · Unreal MCP · Python · C++</dd></div>
+      </dl>
+
+      <div class="block">
+        <p class="block-label">演示</p>
+        <div class="block-body">
+          <figure class="clip vr-clip"><video controls playsinline preload="none" :src="vrClip" aria-label="VR + 3DGS 数字人导览演示"></video><figcaption>3DGS 场景中的数字人导览</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="block-label">导览流程</p>
+        <div class="block-body">
+          <p>基础关卡 VRTemplateMap5 中，<code>BP_KellanGuide</code> 与三个 <code>PatrolPoint</code>、三个 <code>PointTarget</code> 配套：站位与指向对象分开配置，可以表达「角色站在通道中、指向侧面展品」。</p>
+          <ol>
+            <li>移动到当前展点</li>
+            <li>抵达与站位处理</li>
+            <li>玩家未靠近时循环播放等待提示并检查距离</li>
+            <li>靠近后讲解并播放指向动作</li>
+            <li>推进到下一展点</li>
+            <li>移动失败或卡住时重试、跳过不可达点</li>
+          </ol>
+          <p>难点不在把角色送到点位，而在玩家是否跟上、导航失败后如何继续。</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="block-label">动画链路</p>
+        <div class="block-body">
+          <p>身体动作先在统一源骨架（UEFN Mannequin）上组织，经 <code>ABP_KellanGuide_Source</code> → <code>ABP_GenericRetarget</code> 驱动 MetaHuman Body；面部由 <code>Face_AnimBP</code> 与 DefaultSlot 上的 Montage 承载讲解表现，音频走 AudioComponent。</p>
+          <p class="note">这里的「动画优化」是动画重定向、动画蓝图接线与局部动画资产修复，不包含自动生成蒙皮权重。</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="block-label">MCP 辅助重定向迁移</p>
+        <div class="block-body">
+          <p>迁移到 UE5.8 后，<code>ABP_GenericRetarget</code> 原先依赖 Retarget IK Goals 与控制器类型的参数更新方式需要适配。排查同时涉及操作栈、控制器转换和蓝图执行连线。</p>
+          <p>三类工具各管一段：MCP 读取蓝图节点、引脚与连接关系，执行断线、连线与严格编译；Unreal Python 读取重定向资产、重建函数图、保存并输出检查报告；C++ 把参数处理封装为 <code>UpdateRetargetProfileFromCurves</code>，遍历 <code>FRetargetProfile</code> 时按操作设置的结构体类型处理 Blend to Source 与 Offset Goals。</p>
+          <p><code>ChainCurveMap</code> 把目标骨骼链映射到动画曲线，按曲线权重更新对应链，未映射链与无关设置保留原值：</p>
+          <ul>
+            <li><code>BlendToSource = Lerp(原值, 1, w)</code></li>
+            <li><code>LocalTranslationOffset = Lerp(原值, 零向量, w)</code></li>
+          </ul>
+          <p>迁移报告显示相关函数完成四节点重建并编译、保存成功；历史 PIE 日志检查在所检查的 123 行窗口内没有错误。参数覆盖逻辑另有原生自动化测试，覆盖链选择、设置保留、空实例、缺失操作与输入不被修改。</p>
+          <p class="note">MCP 的连线修改与后续 C++ 迁移是两次迭代，早期脚本不等同于最终函数图结构。</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="block-label">跨骨架手势修复</p>
+        <div class="block-body">
+          <p>复用的指向动作能驱动角色，但手型与收手过渡仍不自然；左右手与不同骨架的局部轴差异，使直接复制旋转值不可靠。</p>
+          <p>处理分两步：先从右手抓握参考动作采样姿态，构造手掌局部基底把参考手指方向映射到目标左手，只修复中指、无名指、小指与拇指共 12 个关节，保留食指指向；再把右臂替换为 Idle，左臂从第 45 帧用四元数插值平滑回 Idle。修复权重随抬臂程度与动作时间变化，在动作首尾回到零。</p>
+          <p>原动作长度 2.7 秒、81 帧区间、82 个采样关键点；处理后非目标骨骼的局部平移差为零，最大旋转差约 0.0000024°，过渡时长 1.2 秒，最终快照引用 IdleArms_v3。</p>
+          <p class="note">这些数字证明的是修改范围与数值一致性，动作是否自然仍需看实际画面。</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="block-label">可打断的导览交互</p>
+        <div class="block-body">
+          <p>实验在由 VRTemplateMap5 另存的 <code>GuideIntentLab</code> 中进行，角色与控制器使用副本，共享原地形、导航、音频与动画资源。为避免自动推进回调与实验控制竞争，副本中原有事件连线已断开，入口与运行状态由 <code>AGuideIntentLab</code> 管理。</p>
+          <p>文字与语音共用一条执行链：文字输入或麦克风 → Silero VAD 检出开口（同时暂停当前动作）→ sherpa-onnx 流式识别 → 最终文本提交 → 有限意图解析 → 控制导航、音频与面部 Montage。中间识别结果不触发展点切换。</p>
+          <table class="metrics">
+            <thead><tr><th>问题</th><th>处理</th></tr></thead>
+            <tbody>
+              <tr><td>中间文本变化误触发导航</td><td>只有最终识别文本进入动作执行入口</td></tr>
+              <tr><td>暂停面部更新破坏头身同步</td><td>只暂停讲解 Montage，继续更新 Face AnimBP</td></tr>
+              <tr><td>暂停后切换展品仍带暂停标记</td><td>取消旧播放时显式清除音频暂停标记</td></tr>
+              <tr><td>旧语音请求返回影响新会话</td><td>会话标识过滤旧请求，并维护事件游标</td></tr>
+              <tr><td>远处说「继续」跳过等待</td><td>等待状态仍检查玩家与展点的水平距离</td></tr>
+            </tbody>
+          </table>
+          <p>实验记录中，原生编译、20 条文字用例、7 项 PIE 控制检查、4 条合成语音到意图用例与 2 项语音会话隔离测试通过，另有头颈姿态、玩家朝向和第二展点等待播放的回归记录。</p>
+          <p class="note">当前交互入口是桌面 PIE 面板；自由问答尚未实现，现为有限意图规则识别。真人噪声环境打断、头显内世界空间 UI 与打包交付仍需单独验收。</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="block-label">导航方向平滑</p>
+        <div class="block-body">
+          <p>自定义 <code>VRGsplatSmoothCrowdFollowingComponent</code> 对 Detour 预判转向的水平速度方向做指数平滑，同时限制与原请求方向的角度差：默认时间常数 0.08 s、最大方向滞后 15°，保留水平速度大小，临近终点、停止或穿越导航连接时绕过过滤。</p>
+          <p class="note">现有材料没有转向抖动改善比例或路径成功率对照数据。</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="block-label">后续方向</p>
+        <div class="block-body">
+          <ol>
+            <li>把实验入口扩展为头显内世界空间 UI，验证真实 VR 操作流程。</li>
+            <li>用真人语音与噪声场景测量识别成功率、误打断率与响应延迟。</li>
+            <li>补充动画修复前后录屏与人工评价，建立表现质量对照。</li>
+            <li>为 MCP 编辑器任务记录耗时、失败情况与重复执行表现。</li>
+            <li>有限意图执行层稳定后，再探索知识库问答或大模型兜底，并保留可取消的动作接口。</li>
+          </ol>
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
     <dl class="explore-facts">
       <div><dt>时间</dt><dd>2026.09</dd></div>
       <div><dt>输入</dt><dd>古风数字人三视图</dd></div>
@@ -173,6 +282,7 @@ const media = '/media/explore/digital-human'
         </ol>
       </CaseChapter>
     </section>
+    </template>
   </div>
 </template>
 
@@ -188,6 +298,11 @@ const media = '/media/explore/digital-human'
 .block-body>p{font-size:14px;line-height:1.95;color:#4f4f47}
 .block-body>p+p{margin-top:12px}
 .block-body>p.note{font-size:12.5px;line-height:1.9;color:#807d73;margin-top:14px;padding-left:14px;border-left:1px solid var(--rule)}
+.block-body ul,.block-body ol{margin:14px 0 0;padding-left:18px;font-size:13.5px;line-height:1.9;color:#4f4f47}
+.block-body li+li{margin-top:6px}
+.block-body ul+p,.block-body ol+p,.block-body table+p{margin-top:16px}
+.block-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#4f4f47;background:#f1f0ec;padding:1px 4px}
+.block-body .metrics{margin-top:16px}
 .prompt{margin:0 0 20px;padding:2px 0 2px 18px;border-left:1px solid #b9b9af;font-size:13.5px;line-height:1.95;color:#56564d}
 .badge{font-size:9px;letter-spacing:.06em;color:#8c8d81;border:1px solid var(--rule);padding:2px 7px;white-space:nowrap}
 .badge.ok{color:#4c5a3f;border-color:#c0c7b4}
@@ -199,6 +314,7 @@ figure{margin:18px 0 0}
 figure img{display:block;width:100%;height:auto;background:#efeeea}
 figcaption{margin-top:8px;padding-top:8px;border-top:1px solid var(--rule);font-size:10px;line-height:1.7;color:#939087;letter-spacing:.02em}
 figure.clip video{display:block;width:100%;height:auto;background:#1b1b19}
+figure.vr-clip video{aspect-ratio:16/9;height:auto}
 .metrics{width:100%;border-collapse:collapse;margin-top:4px;font-size:12.5px;color:#57574f}
 .metrics th{text-align:left;font-weight:400;font-size:9px;letter-spacing:.105em;text-transform:uppercase;color:#8c8d81;padding:0 14px 10px 0;border-bottom:1px solid #b9b9af}
 .metrics td{padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
