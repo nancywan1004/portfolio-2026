@@ -32,6 +32,9 @@
 .note-clips .note-clip-text>span{font-size:9px;letter-spacing:.06em;color:#a09d93}
 .case-detail .text-link{display:inline-block;margin-top:20px}
 @media(max-width:760px){.note-clips{margin-top:18px;padding-top:14px}.note-clips ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.note-clips .note-clip-text{font-size:11.5px}.note-clips .note-clip-text>span{font-size:8px}.case-detail .text-link{margin-top:16px}}
+/* 项目封面：03/04 改用真实项目图，保持原图比例，不裁切内容 */
+.project-cover{display:block;width:100%;height:auto;aspect-ratio:780/440;object-fit:cover;background:#eae8e2;transition:opacity .25s}
+.work-image:hover .project-cover{opacity:.92}
 @media(max-width:370px){.site-header nav{gap:13px}.site-header nav button{font-size:9px}.home-intro h1{font-size:43px}.intro-description{font-size:16px}.orbit-callout{--star:28px}.callout-number{font-size:6px;margin-right:4px}.callout-title{font-size:17px}.callout-subtitle{font-size:6px}.work-heading h1{font-size:40px}.editorial-heading h1{font-size:44px}.conversation-note{font-size:6px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none!important}}
 @media(max-width:760px){.close-assistant{top:24px;bottom:auto}}

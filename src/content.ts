@@ -55,7 +55,7 @@ export const projects: Project[] = [
   {
     id: '03', kind: 'work', title: 'YumeGO AR / ACRONYM', category: 'AR 内容分发平台 / 品牌化 ARG', year: '2023',
     tags: 'Unity · Lua / xLua · AssetBundle · Timeline',
-    description: 'AR Content Delivery Platform：以 AssetBundle 热更分发游戏内容的平台，用模板加定制化的方式开发和交付项目。与 ACRONYM、ASUS、ROG 合作的全球品牌化 ARG 由此平台承载。',
+    description: 'AR Content Delivery Platform：以 AssetBundle 热更分发游戏内容的平台。与 ACRONYM、ASUS、ROG 合作的全球品牌化 ARG 由此平台承载。',
     detail: '角色：SDK 与内容研发，从 0 到 1 完成 ACRONYM 项目交付。',
     status: 'published',
     sections: [
@@ -98,7 +98,7 @@ export const projects: Project[] = [
   {
     id: '04', kind: 'work', title: 'BUILDPORT XUMIA', category: 'Meta Quest 空间计算游戏', year: '2023 — 2024',
     tags: 'Unity · Zenject · UI Toolkit · Meta Quest',
-    description: '自研 Roblox 风格 Build + Battle 的 VR 多人在线社交游戏：面向空间计算从头设计，物理空间作为数字都市的画布，含 Core Siege 模式，已上线 Meta Quest。',
+    description: '自研 Roblox 风格 Build + Battle 的 VR 多人在线社交游戏，已上线 Meta Quest。',
     detail: '角色：Unity 系统与工具工程师。',
     status: 'published',
     sections: [

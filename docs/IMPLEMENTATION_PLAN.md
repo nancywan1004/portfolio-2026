@@ -609,6 +609,19 @@ R_i 控制各条曲线的空间姿态；轴长、角度分布与正交相机共�
 - 3 张 Mermaid 流程图未转 SVG，改为有序列表与表格表达；`.block-body` 增加 ol/ul/code/table 的 scoped 样式，表格复用 `.metrics`。
 - 验证：构建通过；1440 下 8 个块、表格 720px，`scrollW == clientW`；390 下表格 343px、无横向溢出。截图 `/tmp/labs02-desktop.png`、`/tmp/labs02-mobile.png`。
 
+### 该条正文精简
+
+- 用户反馈文字冗长。保留 8 个块与全部数字，删去过程性描述与重复限定：导览流程由 6 步压到 4 步；动画链路只留链路与一句边界；MCP 段落合并为「问题 + 三条工具分工 + 曲线插值 + 结果 + 迭代边界」；手势修复由 4 段压到 3 句加一条注；可打断交互删去副本资源与事件管理细节，只留执行链；导航平滑并为一段；后续方向 5 条压到 3 条。
+- 页面高度由约两屏降到一屏内，1440 下整条记录基本可在单屏读完。
+- 验证：构建通过，块数与表格宽度不变，390 无横向溢出。
+
+### 03 / 04 项目封面换真实项目图（2026-11-03）
+
+- 用户提供两张 1080×608 截图：ACRONYM ARG 夜景光门、BUILDPORT XUMIA VR 游戏画面。原样复制为 `public/media/acronym/acronym-project-cover.png`（640 KB）与 `public/media/buildport/buildport-xumia-cover.png`（520 KB），未缩放、未裁切。
+- `App.vue` 的封面分支在 01 / 02 之后新增 03 / 04 的 `<img class="project-cover">`，其余项目仍用 `ProjectArtwork`。新样式 `aspect-ratio:1080/608;object-fit:cover`，悬停透明度与另两个封面一致。
+- 实测：1440 下 03 封面 389×219、04 为 391×219，原图 1080×608；390 下均 344×193，`scrollW == clientW`，无横向溢出。
+- 用户同意压缩后：用 `cwebp -q 82 -resize 780 0` 转成 780×440 WebP，`acronym-project-cover.webp` 26.6 KB、`buildport-xumia-cover.webp` 37.3 KB（合计约 64 KB，原 PNG 合计 1.16 MB，降幅约 94%）。原 PNG 已删除，`<img>` 的 width/height 与 `.project-cover` 的 `aspect-ratio` 同步为 780×440，显示尺寸不变（1440 下 389×220，390 下 344×193）。sips 不能导出 WebP（`--formats` 中 webp 不可写），改用本机 `cwebp`。
+
 ### 演示封面放大
 
 - 用户反馈 03/04 的图仍明显小于前两条。实测：01 的案例媒体宽 1012px、02 为 379–1180px，而 03 当时只有 64×88 的缩略图，04 没有任何媒体，视觉上自然偏小。
